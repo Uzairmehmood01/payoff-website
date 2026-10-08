@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FDFBF7">
+    <title>PAYOFF - Women Ready to Wear</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-green: #6B7043; 
+            --brand-green-dark: #4A4E2E;
+            --bg-cream: #FDFBF7;
+            --bg-card: #F4F2EA;
+            --text-dark: #2C2C2C;
+            --text-muted: #777;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: var(--font-sans); background-color: var(--bg-cream); color: var(--brand-green); overflow-x: hidden; }
+
+        /* HEADER */
+        header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-smooth); color: var(--bg-cream); }
+        header.scrolled { background-color: rgba(253, 251, 247, 0.95); color: var(--brand-green); box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 15px 30px; backdrop-filter: blur(10px); }
+        .header-left, .header-right { display: flex; align-items: center; gap: 15px; flex: 1; }
+        .header-right { justify-content: flex-end; }
+        .logo { font-size: clamp(22px, 5vw, 30px); font-weight: 700; letter-spacing: -1px; text-transform: lowercase; font-family: var(--font-serif); cursor: pointer; flex: 1; text-align: center; }
+        .icon-btn { cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: 0.3s; position: relative; }
+        .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; transition: 0.3s; }
+        .icon-btn:hover svg { transform: scale(1.1); }
+        .menu-btn { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 40px; height: 40px; cursor: pointer; }
+        .menu-btn span { display: block; width: 24px; height: 2px; background-color: currentColor; transition: 0.3s; }
+
+        /* BANNER */
+        .category-banner { position: relative; width: 100%; height: 70vh; min-height: 450px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .category-banner-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; }
+        .category-banner-content { position: relative; z-index: 10; text-align: center; color: rgba(253, 251, 247, 0.65); padding: 0 20px; max-width: 1000px; }
+        .category-banner-title { font-family: var(--font-serif); font-size: clamp(48px, 12vw, 110px); font-weight: 400; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .category-banner-subtitle { font-size: clamp(14px, 3vw, 18px); font-weight: 300; letter-spacing: 5px; text-transform: uppercase; opacity: 0.8; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+
+        /* SLIDER SECTION */
+        .slider-section { padding: 60px 0; background-color: var(--bg-cream); }
+        .slider-header { text-align: center; margin-bottom: 40px; padding: 0 20px; }
+        .slider-title { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 42px); font-weight: 700; color: var(--brand-green); letter-spacing: 2px; text-transform: uppercase; }
+        .slider-container { position: relative; display: flex; align-items: center; }
+        .product-slider { display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding: 0 30px 20px; scrollbar-width: none; -ms-overflow-style: none; }
+        .product-slider::-webkit-scrollbar { display: none; }
+        .product-card { flex: 0 0 280px; cursor: pointer; position: relative; background-color: var(--bg-card); }
+        @media (min-width: 768px) { .product-card { flex: 0 0 320px; } }
+        .product-image-container { position: relative; overflow: hidden; aspect-ratio: 3/4; }
+        .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .product-card:hover .product-image { transform: scale(1.05); }
+        .wishlist-btn { position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; background-color: rgba(253, 251, 247, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; z-index: 10; border: none; backdrop-filter: blur(4px); }
+        .wishlist-btn svg { width: 18px; height: 18px; stroke: var(--brand-green); fill: none; transition: 0.3s; }
+        .wishlist-btn.active svg { fill: var(--brand-green); stroke: var(--brand-green); }
+        .wishlist-btn:hover { background-color: var(--bg-cream); transform: scale(1.1); }
+        .product-info { padding: 15px 0; text-align: center; }
+        .product-name { font-size: clamp(14px, 3vw, 16px); font-weight: 500; color: var(--text-dark); margin-bottom: 5px; }
+        .product-price { font-size: clamp(13px, 3vw, 15px); color: var(--text-muted); }
+        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background-color: rgba(253, 251, 247, 0.9); border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 20; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: none; transition: 0.3s; }
+        .slider-nav:hover { background-color: var(--brand-green); color: var(--bg-cream); }
+        .slider-nav svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .slider-nav.left { left: 10px; }
+        .slider-nav.right { right: 10px; }
+        @media (min-width: 768px) { .slider-nav { display: flex; } .product-slider { padding: 0 80px 20px; } }
+
+        /* SIDE MENU */
+        .side-menu { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; height: 100dvh; background-color: var(--bg-cream); z-index: 2000; transition: var(--transition-smooth); padding: 40px 30px; box-shadow: 5px 0 30px rgba(0,0,0,0.1); overflow-y: auto; display: flex; flex-direction: column; }
+        .side-menu.open { left: 0; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; line-height: 1; cursor: pointer; color: var(--brand-green); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+        .menu-list { list-style: none; margin-top: 60px; }
+        .menu-item { border-bottom: 1px solid rgba(107, 112, 67, 0.15); }
+        .menu-item > a { display: block; padding: 20px 0; font-size: clamp(20px, 6vw, 26px); text-decoration: none; color: var(--brand-green); font-weight: 400; font-family: var(--font-serif); transition: 0.3s; cursor: pointer; }
+        .menu-item > a:hover { color: var(--brand-green-dark); padding-left: 10px; }
+        .sub-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; list-style: none; padding-left: 15px; }
+        .sub-menu li a { display: block; padding: 12px 0; font-size: clamp(15px, 4vw, 18px); color: var(--brand-green); text-decoration: none; opacity: 0.8; }
+        .sub-menu li a:hover { opacity: 1; text-decoration: underline; }
+
+        /* FOOTER */
+        .footer { background-color: var(--bg-cream); padding: 60px 30px 40px; border-top: 1px solid rgba(107, 112, 67, 0.1); }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px; }
+        @media (min-width: 768px) { .footer-container { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
+        .footer-column h3 { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-green); margin-bottom: 25px; }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 12px; }
+        .footer-column ul li a { text-decoration: none; color: var(--text-muted); font-size: 14px; font-weight: 400; transition: 0.3s; line-height: 1.5; }
+        .footer-column ul li a:hover { color: var(--brand-green); text-decoration: underline; }
+        .footer-column p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+        .footer-column .social-link { display: inline-block; text-decoration: none; color: var(--text-muted); font-size: 14px; transition: 0.3s; }
+        .footer-column .social-link:hover { color: var(--brand-green); text-decoration: underline; }
+        .footer-bottom { max-width: 1400px; margin: 50px auto 0; padding-top: 25px; border-top: 1px solid rgba(107, 112, 67, 0.1); display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+        .footer-bottom-left { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); cursor: pointer; }
+        .footer-bottom-left svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .footer-bottom-right { display: flex; gap: 25px; }
+        .footer-bottom-right a { text-decoration: none; color: var(--text-muted); font-size: 14px; transition: 0.3s; }
+        .footer-bottom-right a:hover { color: var(--brand-green); text-decoration: underline; }
+
+        /* TOAST & OVERLAY */
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background-color: var(--brand-green); color: var(--bg-cream); padding: 15px 30px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 3000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0; pointer-events: none; }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1500; opacity: 0; pointer-events: none; transition: 0.5s; backdrop-filter: blur(3px); }
+        .overlay.active { opacity: 1; pointer-events: auto; }
+
+        @media (min-width: 768px) {
+            header { padding: 25px 50px; }
+            header.scrolled { padding: 20px 50px; }
+            .side-menu { width: 400px; padding: 50px; }
+            .close-btn { top: 30px; right: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="header-left">
+            <div class="menu-btn" id="openMenu"><span></span><span></span><span></span></div>
+        </div>
+        <div class="logo" onclick="window.location.href='index.html'">payoff</div>
+        <div class="header-right">
+            <div class="icon-btn" id="searchBtn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            <div class="icon-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+        </div>
+    </header>
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay" style="position:fixed;top:0;left:0;width:100%;height:100vh;background-color:var(--bg-cream);z-index:3000;transform:translateY(-100%);transition:var(--transition-smooth);overflow-y:auto;padding:40px 20px;display:flex;flex-direction:column;align-items:center;">
+        <div style="font-family:var(--font-serif);font-size:clamp(28px,6vw,48px);font-weight:700;color:var(--brand-green);letter-spacing:2px;text-transform:uppercase;margin-bottom:50px;margin-top:20px;text-align:center;">PAYOFF</div>
+        <div style="width:100%;max-width:900px;position:relative;margin-bottom:60px;">
+            <input type="text" style="width:100%;padding:20px 60px 20px 30px;font-size:clamp(16px,3vw,20px);border:1px solid rgba(107,112,67,0.3);border-radius:50px;background:transparent;color:var(--brand-green);outline:none;" placeholder="Search for a product" id="searchInput">
+            <div style="position:absolute;right:25px;top:50%;transform:translateY(-50%);font-size:30px;cursor:pointer;color:var(--brand-green);" id="searchClose">&times;</div>
+        </div>
+    </div>
+
+    <!-- WOMEN BANNER -->
+    <section class="category-banner">
+        <div class="category-banner-bg" style="background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop');"></div>
+        <div class="category-banner-content">
+            <h1 class="category-banner-title">Women Ready to Wear</h1>
+            <p class="category-banner-subtitle">The New Collection</p>
+        </div>
+    </section>
+
+    <!-- PENTS SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">Pents</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('pentsSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="pentsSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" alt="Pents 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">High-Waist Pents</div><div class="product-price">$120</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" alt="Pents 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Tailored Pents</div><div class="product-price">$150</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?q=80&w=800&auto=format&fit=crop" alt="Pents 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Wide-Leg Pents</div><div class="product-price">$140</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('pentsSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- SHIRTS SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">Shirts</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('shirtsSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="shirtsSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?q=80&w=800&auto=format&fit=crop" alt="Shirt 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Silk Blouse</div><div class="product-price">$150</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop" alt="Shirt 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Cotton Shirt</div><div class="product-price">$120</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1551163943-3f6a855d1153?q=80&w=800&auto=format&fit=crop" alt="Shirt 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Floral Blouse</div><div class="product-price">$140</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('shirtsSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- SHALWAAR KAMEEZ SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">Shalwaar Kameez</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('shalwaarSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="shalwaarSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Shalwaar 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Embroidered Shalwaar Kameez</div><div class="product-price">$300</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" alt="Shalwaar 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Classic Shalwaar Kameez</div><div class="product-price">$250</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=800&auto=format&fit=crop" alt="Shalwaar 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Festive Shalwaar Kameez</div><div class="product-price">$350</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('shalwaarSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- 2 PIECE SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">2 Piece</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('2pieceSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="2pieceSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=800&auto=format&fit=crop" alt="2 Piece 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Casual 2 Piece</div><div class="product-price">$180</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="2 Piece 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Formal 2 Piece</div><div class="product-price">$220</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" alt="2 Piece 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Embroidered 2 Piece</div><div class="product-price">$260</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('2pieceSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- 3 PIECE SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">3 Piece</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('3pieceSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="3pieceSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" alt="3 Piece 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Luxury 3 Piece</div><div class="product-price">$380</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="3 Piece 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Bridal 3 Piece</div><div class="product-price">$550</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=800&auto=format&fit=crop" alt="3 Piece 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Designer 3 Piece</div><div class="product-price">$420</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('3pieceSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- SHOES SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">Shoes</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('shoesSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="shoesSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800&auto=format&fit=crop" alt="Shoe 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Classic Heels</div><div class="product-price">$220</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop" alt="Shoe 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Casual Flats</div><div class="product-price">$150</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1596703263926-eb0762ee17e4?q=80&w=800&auto=format&fit=crop" alt="Shoe 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Designer Sandals</div><div class="product-price">$180</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('shoesSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- TROUSERS SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">Trousers</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('trousersSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="trousersSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" alt="Trouser 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Casual Trousers</div><div class="product-price">$130</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?q=80&w=800&auto=format&fit=crop" alt="Trouser 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Formal Trousers</div><div class="product-price">$160</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" alt="Trouser 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Slim Fit Trousers</div><div class="product-price">$140</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('trousersSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- TRACK SUITS SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">Track Suits</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('trackSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="trackSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Track 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Sport Track Suit</div><div class="product-price">$130</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=800&auto=format&fit=crop" alt="Track 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Premium Track Suit</div><div class="product-price">$180</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=800&auto=format&fit=crop" alt="Track 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Training Track Suit</div><div class="product-price">$150</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('trackSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- HOODIES SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">Hoodies</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('hoodiesSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="hoodiesSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" alt="Hoodie 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Essential Hoodie</div><div class="product-price">$110</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=800&auto=format&fit=crop" alt="Hoodie 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Zip-Up Hoodie</div><div class="product-price">$130</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?q=80&w=800&auto=format&fit=crop" alt="Hoodie 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Oversized Hoodie</div><div class="product-price">$140</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('hoodiesSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- JACKETS SLIDER -->
+    <section class="slider-section">
+        <div class="slider-header"><h2 class="slider-title">Jackets</h2></div>
+        <div class="slider-container">
+            <button class="slider-nav left" onclick="slide('jacketsSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
+            <div class="product-slider" id="jacketsSlider">
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop" alt="Jacket 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Leather Jacket</div><div class="product-price">$450</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" alt="Jacket 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Wool Coat</div><div class="product-price">$380</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1548126032-079a0fb0099d?q=80&w=800&auto=format&fit=crop" alt="Jacket 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Bomber Jacket</div><div class="product-price">$320</div></div></div>
+            </div>
+            <button class="slider-nav right" onclick="slide('jacketsSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column"><h3>Help</h3><ul><li><a href="#">You can call or email us.</a></li><li><a href="#">FAQ's</a></li><li><a href="#">Product Care</a></li><li><a href="#">Stores</a></li></ul></div>
+            <div class="footer-column"><h3>Services</h3><ul><li><a href="#">Repairs</a></li><li><a href="#">Personalization</a></li><li><a href="#">Art of Gifting</a></li><li><a href="#">Download our Apps</a></li></ul></div>
+            <div class="footer-column"><h3>About Payoff</h3><ul><li><a href="#">Fashion Shows</a></li><li><a href="#">Arts & Culture</a></li><li><a href="#">La Maison</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Latest News</a></li><li><a href="#">Ethics and Compliance</a></li><li><a href="#">Careers</a></li><li><a href="#">Foundation Payoff</a></li></ul></div>
+            <div class="footer-column"><h3>Email Sign-up</h3><p>Sign up for Payoff emails and receive the latest news from the Maison.</p><a href="#" class="social-link">Follow Us</a></div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-left"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><span>International (English)</span></div>
+            <div class="footer-bottom-right"><a href="#">Sitemap</a><a href="#">Legal & privacy</a><a href="#">Cookies</a></div>
+        </div>
+    </footer>
+
+    <!-- SIDE MENU -->
+    <div class="overlay" id="overlay"></div>
+    <nav class="side-menu" id="sideMenu">
+        <div class="close-btn" id="closeMenu">&times;</div>
+        <ul class="menu-list">
+            <li class="menu-item"><a class="category-toggle" data-target="men">Men</a>
+                <ul class="sub-menu" id="men">
+                    <li><a href="men-readytowear.html">Ready to Wear</a></li>
+                    <li><a href="#">Pents</a></li><li><a href="#">Shirts</a></li><li><a href="#">Shalwaar Kameez</a></li><li><a href="#">Kurta Pajama</a></li><li><a href="#">Trousers</a></li><li><a href="#">Track Suits</a></li><li><a href="#">Hoodies</a></li><li><a href="#">Jackets</a></li><li><a href="#">Shoes</a></li>
+                </ul>
+            </li>
+            <li class="menu-item"><a class="category-toggle" data-target="women">Women</a>
+                <ul class="sub-menu" id="women">
+                    <li><a href="women-readytowear.html">Ready to Wear</a></li>
+                    <li><a href="#">Pents</a></li><li><a href="#">Shirts</a></li><li><a href="#">Shalwaar Kameez</a></li><li><a href="#">2 Piece</a></li><li><a href="#">3 Piece</a></li><li><a href="#">Shoes</a></li><li><a href="#">Trousers</a></li><li><a href="#">Track Suits</a></li><li><a href="#">Hoodies</a></li><li><a href="#">Jackets</a></li>
+                </ul>
+            </li>
+            <li class="menu-item"><a class="category-toggle" data-target="newin">New In</a>
+                <ul class="sub-menu" id="newin"><li><a href="#">Latest Drop</a></li><li><a href="#">Editor's Picks</a></li></ul>
+            </li>
+            <li class="menu-item"><a class="category-toggle" data-target="sale">Sale</a>
+                <ul class="sub-menu" id="sale"><li><a href="#">Men's Sale</a></li><li><a href="#">Women's Sale</a></li></ul>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="toast" id="toast">Added to Wishlist</div>
+
+    <script>
+        // SLIDER FUNCTION
+        function slide(sliderId, direction) {
+            const slider = document.getElementById(sliderId);
+            const scrollAmount = 340;
+            slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+        }
+
+        // HEADER SCROLL
+        const header = document.getElementById('header');
+        function checkScroll() {
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        }
+        checkScroll();
+        window.addEventListener('scroll', checkScroll, { passive: true });
+
+        // SIDE MENU
+        const openBtn = document.getElementById('openMenu');
+        const closeBtn = document.getElementById('closeMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+        const body = document.body;
+
+        function toggleMenu() {
+            const isOpen = sideMenu.classList.contains('open');
+            if (isOpen) {
+                sideMenu.classList.remove('open');
+                overlay.classList.remove('active');
+                body.style.overflow = ''; 
+            } else {
+                sideMenu.classList.add('open');
+                overlay.classList.add('active');
+                body.style.overflow = 'hidden'; 
+            }
+        }
+        openBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // ACCORDION
+        const toggles = document.querySelectorAll('.category-toggle');
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault(); 
+                const targetId = this.getAttribute('data-target');
+                const targetMenu = document.getElementById(targetId);
+                document.querySelectorAll('.sub-menu').forEach(menu => {
+                    if (menu !== targetMenu) menu.style.maxHeight = null;
+                });
+                if (targetMenu.style.maxHeight) targetMenu.style.maxHeight = null;
+                else targetMenu.style.maxHeight = targetMenu.scrollHeight + "px";
+            });
+        });
+
+        // WISHLIST
+        const wishlistBtns = document.querySelectorAll('.wishlist-btn');
+        const toast = document.getElementById('toast');
+        wishlistBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); 
+                this.classList.toggle('active');
+                if (this.classList.contains('active')) {
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2000);
+                }
+            });
+        });
+
+        // SEARCH
+        const searchBtn = document.getElementById('searchBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchClose = document.getElementById('searchClose');
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                searchOverlay.classList.add('open');
+                body.style.overflow = 'hidden'; 
+            });
+        }
+        if (searchClose) {
+            searchClose.addEventListener('click', () => {
+                searchOverlay.classList.remove('open');
+                body.style.overflow = ''; 
+            });
+        }
+    </script>
+</body>
+</html>

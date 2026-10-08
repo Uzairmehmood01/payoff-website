@@ -2,290 +2,191 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Standard responsive viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FDFBF7">
     <title>PAYOFF - Luxury Clothing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* --- CSS VARIABLES & RESET --- */
         :root {
             --brand-green: #6B7043; 
             --brand-green-dark: #4A4E2E;
             --bg-cream: #FDFBF7;
+            --bg-card: #F4F2EA;
             --text-dark: #2C2C2C;
-            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            --transition-smooth: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            --text-muted: #777;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: var(--font-sans); background-color: var(--bg-cream); color: var(--brand-green); overflow-x: hidden; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent; 
-        }
+        /* HEADER */
+        header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-smooth); color: var(--bg-cream); }
+        header.scrolled { background-color: rgba(253, 251, 247, 0.95); color: var(--brand-green); box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 15px 30px; backdrop-filter: blur(10px); }
+        .header-left, .header-right { display: flex; align-items: center; gap: 15px; flex: 1; }
+        .header-right { justify-content: flex-end; }
+        .logo { font-size: clamp(22px, 5vw, 30px); font-weight: 700; letter-spacing: -1px; text-transform: lowercase; font-family: var(--font-serif); cursor: pointer; flex: 1; text-align: center; }
+        .icon-btn { cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: 0.3s; position: relative; }
+        .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; transition: 0.3s; }
+        .icon-btn:hover svg { transform: scale(1.1); }
+        .menu-btn { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 40px; height: 40px; cursor: pointer; }
+        .menu-btn span { display: block; width: 24px; height: 2px; background-color: currentColor; transition: 0.3s; }
 
-        body {
-            font-family: var(--font-main);
-            background-color: var(--bg-cream);
-            color: var(--brand-green);
-            overflow-x: hidden;
-        }
-
-        /* --- HEADER --- */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: var(--transition-smooth);
-            color: var(--bg-cream); /* Starts white for hero image */
-        }
-
-        header.scrolled {
-            background-color: rgba(253, 251, 247, 0.95);
-            color: var(--brand-green);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            padding: 15px 30px;
-            backdrop-filter: blur(10px);
-        }
-
-        .logo {
-            font-size: clamp(24px, 5vw, 32px); /* Scales smoothly */
-            font-weight: 700;
-            letter-spacing: -1px;
-            text-transform: lowercase;
-            font-family: serif; 
-            cursor: pointer;
-            z-index: 1001;
-        }
-
-        /* Hamburger Menu Button */
-        .menu-btn {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 6px;
-            width: 44px;
-            height: 44px;
-            z-index: 1001;
-        }
-
-        .menu-btn span {
-            display: block;
-            width: 28px;
-            height: 2px;
-            background-color: currentColor;
-            transition: 0.3s;
-        }
-
-        /* --- HERO SLIDER --- */
-        .hero {
-            /* Uses dynamic viewport height to account for mobile browser bars */
-            height: 100vh;
-            height: 100dvh; 
-            width: 100%;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1.2s ease-in-out;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .slide.active {
-            opacity: 1;
-            animation: zoomEffect 12s infinite alternate;
-        }
-
-        @keyframes zoomEffect {
-            from { transform: scale(1); }
-            to { transform: scale(1.08); }
-        }
-
-        /* Placeholder images */
+        /* HERO */
+        .hero { height: 100vh; height: 100dvh; width: 100%; position: relative; overflow: hidden; }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; background-size: cover; background-position: center; }
+        .slide.active { opacity: 1; animation: zoomEffect 12s infinite alternate; }
+        @keyframes zoomEffect { from { transform: scale(1); } to { transform: scale(1.08); } }
         .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop'); }
         .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop'); }
         .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2070&auto=format&fit=crop'); }
 
-        /* --- SIDE MENU (DRAWER) --- */
-        .side-menu {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            /* On Mobile: Full width. On PC: 400px (handled in media query) */
-            width: 100%; 
-            height: 100vh;
-            height: 100dvh;
-            background-color: var(--bg-cream);
-            z-index: 2000;
-            transition: var(--transition-smooth);
-            padding: 40px 30px;
-            box-shadow: 5px 0 30px rgba(0,0,0,0.1);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
+        /* SEARCH OVERLAY */
+        .search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100dvh; background-color: var(--bg-cream); z-index: 3000; transform: translateY(-100%); transition: var(--transition-smooth); overflow-y: auto; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
+        .search-overlay.open { transform: translateY(0); }
+        .search-logo { font-family: var(--font-serif); font-size: clamp(28px, 6vw, 48px); font-weight: 700; color: var(--brand-green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 50px; margin-top: 20px; text-align: center; }
+        .search-input-container { width: 100%; max-width: 900px; position: relative; margin-bottom: 60px; }
+        .search-input { width: 100%; padding: 20px 60px 20px 30px; font-size: clamp(16px, 3vw, 20px); font-family: var(--font-sans); border: 1px solid rgba(107, 112, 67, 0.3); border-radius: 50px; background: transparent; color: var(--brand-green); outline: none; transition: 0.3s; }
+        .search-input:focus { border-color: var(--brand-green); box-shadow: 0 0 0 4px rgba(107, 112, 67, 0.1); }
+        .search-input::placeholder { color: rgba(107, 112, 67, 0.4); }
+        .search-close { position: absolute; right: 25px; top: 50%; transform: translateY(-50%); font-size: 30px; cursor: pointer; color: var(--brand-green); line-height: 1; transition: 0.3s; }
+        .search-close:hover { transform: translateY(-50%) rotate(90deg); }
+        .search-lists-container { width: 100%; max-width: 900px; display: grid; grid-template-columns: 1fr; gap: 40px; text-align: left; }
+        @media (min-width: 768px) { .search-lists-container { grid-template-columns: 1fr 1fr; gap: 60px; } }
+        .search-list-title { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; border-bottom: 1px solid rgba(107, 112, 67, 0.1); padding-bottom: 10px; }
+        .search-list { list-style: none; display: flex; flex-wrap: wrap; gap: 15px; }
+        .search-list li a { text-decoration: none; color: var(--brand-green); font-size: clamp(14px, 3vw, 16px); font-weight: 400; transition: 0.3s; padding: 5px 0; display: block; }
+        .search-list li a:hover { color: var(--brand-green-dark); text-decoration: underline; }
 
-        .side-menu.open {
-            left: 0;
-        }
+        /* COLLECTION GRID */
+        .collection-section { padding: 100px 30px; max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: clamp(32px, 6vw, 52px); font-family: var(--font-serif); margin-bottom: 60px; font-weight: 700; letter-spacing: 1px; color: var(--brand-green); }
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
+        .product-card { cursor: pointer; position: relative; }
+        .product-image-container { position: relative; overflow: hidden; background-color: var(--bg-card); aspect-ratio: 3/4; }
+        .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
+        .product-card:hover .product-image { transform: scale(1.05); }
+        .wishlist-btn { position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; background-color: rgba(253, 251, 247, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; z-index: 10; border: none; backdrop-filter: blur(4px); }
+        .wishlist-btn svg { width: 18px; height: 18px; stroke: var(--brand-green); fill: none; transition: 0.3s; }
+        .wishlist-btn.active svg { fill: var(--brand-green); stroke: var(--brand-green); }
+        .wishlist-btn:hover { background-color: var(--bg-cream); transform: scale(1.1); }
+        .product-info { padding: 15px 0; text-align: center; }
+        .product-name { font-size: clamp(14px, 3vw, 16px); font-weight: 500; color: var(--text-dark); margin-bottom: 5px; }
+        .product-price { font-size: clamp(13px, 3vw, 15px); color: var(--text-muted); }
 
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 40px;
-            line-height: 1;
-            cursor: pointer;
-            color: var(--brand-green);
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /* EDITORIAL */
+        .editorial-section { position: relative; width: 100%; height: 80vh; min-height: 500px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        .editorial-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=2071&auto=format&fit=crop'); background-size: cover; background-position: center; transition: transform 10s ease-out; }
+        .editorial-section:hover .editorial-bg { transform: scale(1.05); }
+        .editorial-content { position: relative; z-index: 10; text-align: center; color: var(--bg-cream); padding: 0 20px; max-width: 800px; }
+        .editorial-title { font-family: var(--font-serif); font-size: clamp(36px, 8vw, 72px); font-weight: 400; margin-bottom: 20px; letter-spacing: 2px; text-shadow: 0 2px 15px rgba(0,0,0,0.4); }
+        .editorial-subtitle { font-size: clamp(14px, 3vw, 18px); font-weight: 300; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 40px; opacity: 0.9; text-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+        .editorial-btn { display: inline-block; padding: 18px 50px; background-color: transparent; color: var(--bg-cream); text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; border: 1px solid var(--bg-cream); }
+        .editorial-btn:hover { background-color: var(--bg-cream); color: var(--brand-green); }
 
-        .menu-list {
-            list-style: none;
-            margin-top: 60px;
-        }
+        /* SIDE MENU */
+        .side-menu { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; height: 100dvh; background-color: var(--bg-cream); z-index: 2000; transition: var(--transition-smooth); padding: 40px 30px; box-shadow: 5px 0 30px rgba(0,0,0,0.1); overflow-y: auto; display: flex; flex-direction: column; }
+        .side-menu.open { left: 0; }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; line-height: 1; cursor: pointer; color: var(--brand-green); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+        .menu-list { list-style: none; margin-top: 60px; }
+        .menu-item { border-bottom: 1px solid rgba(107, 112, 67, 0.15); }
+        .menu-item > a { display: block; padding: 20px 0; font-size: clamp(20px, 6vw, 26px); text-decoration: none; color: var(--brand-green); font-weight: 400; font-family: var(--font-serif); transition: 0.3s; cursor: pointer; }
+        .menu-item > a:hover { color: var(--brand-green-dark); padding-left: 10px; }
+        .sub-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; list-style: none; padding-left: 15px; }
+        .sub-menu li a { display: block; padding: 12px 0; font-size: clamp(15px, 4vw, 18px); color: var(--brand-green); text-decoration: none; opacity: 0.8; }
+        .sub-menu li a:hover { opacity: 1; text-decoration: underline; }
 
-        .menu-item {
-            border-bottom: 1px solid rgba(107, 112, 67, 0.15);
-        }
+        /* FOOTER */
+        .footer { background-color: var(--bg-cream); padding: 60px 30px 40px; border-top: 1px solid rgba(107, 112, 67, 0.1); }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px; }
+        @media (min-width: 768px) { .footer-container { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
+        .footer-column h3 { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-green); margin-bottom: 25px; }
+        .footer-column ul { list-style: none; }
+        .footer-column ul li { margin-bottom: 12px; }
+        .footer-column ul li a { text-decoration: none; color: var(--text-muted); font-size: 14px; font-weight: 400; transition: 0.3s; line-height: 1.5; }
+        .footer-column ul li a:hover { color: var(--brand-green); text-decoration: underline; }
+        .footer-column p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+        .footer-column .social-link { display: inline-block; text-decoration: none; color: var(--text-muted); font-size: 14px; transition: 0.3s; }
+        .footer-column .social-link:hover { color: var(--brand-green); text-decoration: underline; }
+        .footer-bottom { max-width: 1400px; margin: 50px auto 0; padding-top: 25px; border-top: 1px solid rgba(107, 112, 67, 0.1); display: flex; flex-direction: column; gap: 20px; align-items: center; }
+        @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; } }
+        .footer-bottom-left { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); cursor: pointer; }
+        .footer-bottom-left svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+        .footer-bottom-right { display: flex; gap: 25px; }
+        .footer-bottom-right a { text-decoration: none; color: var(--text-muted); font-size: 14px; transition: 0.3s; }
+        .footer-bottom-right a:hover { color: var(--brand-green); text-decoration: underline; }
 
-        .menu-item > a {
-            display: block;
-            padding: 20px 0;
-            font-size: clamp(20px, 6vw, 26px);
-            text-decoration: none;
-            color: var(--brand-green);
-            font-weight: 500;
-            transition: 0.3s;
-            cursor: pointer;
-        }
+        /* TOAST & OVERLAY */
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background-color: var(--brand-green); color: var(--bg-cream); padding: 15px 30px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 3000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0; pointer-events: none; }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1500; opacity: 0; pointer-events: none; transition: 0.5s; backdrop-filter: blur(3px); }
+        .overlay.active { opacity: 1; pointer-events: auto; }
 
-        .menu-item > a:hover {
-            color: var(--brand-green-dark);
-            padding-left: 10px;
-        }
-
-        /* Sub-categories (Accordion) */
-        .sub-menu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out;
-            list-style: none;
-            padding-left: 15px;
-        }
-
-        .sub-menu li a {
-            display: block;
-            padding: 12px 0;
-            font-size: clamp(15px, 4vw, 18px);
-            color: var(--brand-green);
-            text-decoration: none;
-            opacity: 0.8;
-        }
-
-        .sub-menu li a:hover {
-            opacity: 1;
-            text-decoration: underline;
-        }
-
-        /* --- OVERLAY --- */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.4);
-            z-index: 1500;
-            opacity: 0;
-            pointer-events: none;
-            transition: 0.5s;
-            backdrop-filter: blur(3px);
-        }
-
-        .overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        /* --- CONTENT SECTIONS --- */
-        .content-section {
-            padding: 80px 30px;
-            text-align: center;
-        }
-
-        .content-section h2 {
-            font-size: clamp(28px, 6vw, 36px);
-            margin-bottom: 20px;
-            color: var(--brand-green);
-        }
-
-        .content-section p {
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-            color: #555;
-            font-size: clamp(15px, 4vw, 18px);
-        }
-
-        /* --- DESKTOP OVERRIDES --- */
         @media (min-width: 768px) {
-            header {
-                padding: 25px 50px;
-            }
-            
-            header.scrolled {
-                padding: 20px 50px;
-            }
-
-            .side-menu {
-                width: 400px; /* Fixed width on PC */
-                padding: 50px;
-            }
-
-            .close-btn {
-                top: 30px;
-                right: 30px;
-            }
-
-            .content-section {
-                padding: 120px 40px;
-            }
+            header { padding: 25px 50px; }
+            header.scrolled { padding: 20px 50px; }
+            .side-menu { width: 400px; padding: 50px; }
+            .close-btn { top: 30px; right: 30px; }
+            .collection-section { padding: 120px 50px; }
+            .editorial-section { height: 90vh; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER -->
     <header id="header">
-        <div class="menu-btn" id="openMenu">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="header-left">
+            <div class="menu-btn" id="openMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
         <div class="logo">payoff</div>
-        <div style="width: 28px;"></div> <!-- Spacer for symmetry -->
+        <div class="header-right">
+            <div class="icon-btn" id="searchBtn">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </div>
+            <div class="icon-btn">
+                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </div>
+        </div>
     </header>
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-logo">PAYOFF</div>
+        <div class="search-input-container">
+            <input type="text" class="search-input" placeholder="Search for a product" id="searchInput">
+            <div class="search-close" id="searchClose">&times;</div>
+        </div>
+        <div class="search-lists-container">
+            <div class="search-list-column">
+                <div class="search-list-title">Trending Searches</div>
+                <ul class="search-list">
+                    <li><a href="#">Wallets</a></li>
+                    <li><a href="#">Speedy</a></li>
+                    <li><a href="#">Neverfull</a></li>
+                    <li><a href="#">Pochette</a></li>
+                    <li><a href="#">Imagination</a></li>
+                </ul>
+            </div>
+            <div class="search-list-column">
+                <div class="search-list-title">Seasonal Clothes</div>
+                <ul class="search-list">
+                    <li><a href="#">Winter Coats</a></li>
+                    <li><a href="#">Cashmere Sweaters</a></li>
+                    <li><a href="#">Silk Scarves</a></li>
+                    <li><a href="#">Leather Boots</a></li>
+                    <li><a href="#">Wool Blazers</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <!-- HERO SLIDER -->
     <section class="hero">
@@ -294,19 +195,64 @@
         <div class="slide"></div>
     </section>
 
-    <!-- CONTENT TO SCROLL -->
-    <section class="content-section">
-        <h2>New Collection</h2>
-        <p>Discover the latest arrivals for the season. Crafted with precision and designed for the modern individual.</p>
+    <!-- NEW COLLECTION GRID -->
+    <section class="collection-section" id="collection">
+        <h2 class="section-title">New Collection</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" alt="Product 1" class="product-image">
+                    <button class="wishlist-btn" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Tailored Wool Coat</div><div class="product-price">$1,250</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=800&auto=format&fit=crop" alt="Product 2" class="product-image">
+                    <button class="wishlist-btn" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Silk Evening Dress</div><div class="product-price">$2,100</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800&auto=format&fit=crop" alt="Product 3" class="product-image">
+                    <button class="wishlist-btn" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Leather Handbag</div><div class="product-price">$3,400</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1520975954732-35dd22299614?q=80&w=800&auto=format&fit=crop" alt="Product 4" class="product-image">
+                    <button class="wishlist-btn" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Cashmere Scarf</div><div class="product-price">$650</div></div>
+            </div>
+        </div>
     </section>
-    <section class="content-section" style="background-color: #f4f2ea;">
-        <h2>Our Philosophy</h2>
-        <p>We believe in sustainable fashion that doesn't compromise on style. Every piece tells a story.</p>
+
+    <!-- EDITORIAL -->
+    <section class="editorial-section">
+        <div class="editorial-bg"></div>
+        <div class="editorial-content">
+            <h2 class="editorial-title">The Winter Escape</h2>
+            <p class="editorial-subtitle">Discover the new seasonal campaign</p>
+            <a href="#" class="editorial-btn">Explore the Collection</a>
+        </div>
     </section>
-    <section class="content-section">
-        <h2>Join the Club</h2>
-        <p>Sign up for exclusive access to sales and new drops.</p>
-    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column"><h3>Help</h3><ul><li><a href="#">You can call or email us.</a></li><li><a href="#">FAQ's</a></li><li><a href="#">Product Care</a></li><li><a href="#">Stores</a></li></ul></div>
+            <div class="footer-column"><h3>Services</h3><ul><li><a href="#">Repairs</a></li><li><a href="#">Personalization</a></li><li><a href="#">Art of Gifting</a></li><li><a href="#">Download our Apps</a></li></ul></div>
+            <div class="footer-column"><h3>About Payoff</h3><ul><li><a href="#">Fashion Shows</a></li><li><a href="#">Arts & Culture</a></li><li><a href="#">La Maison</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Latest News</a></li><li><a href="#">Ethics and Compliance</a></li><li><a href="#">Careers</a></li><li><a href="#">Foundation Payoff</a></li></ul></div>
+            <div class="footer-column"><h3>Email Sign-up</h3><p>Sign up for Payoff emails and receive the latest news from the Maison.</p><a href="#" class="social-link">Follow Us</a></div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-left"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg><span>International (English)</span></div>
+            <div class="footer-bottom-right"><a href="#">Sitemap</a><a href="#">Legal & privacy</a><a href="#">Cookies</a></div>
+        </div>
+    </footer>
 
     <!-- SIDE MENU -->
     <div class="overlay" id="overlay"></div>
@@ -316,17 +262,32 @@
             <li class="menu-item">
                 <a class="category-toggle" data-target="men">Men</a>
                 <ul class="sub-menu" id="men">
-                    <li><a href="#">Ready to Wear</a></li>
-                    <li><a href="#">Accessories</a></li>
+                    <li><a href="men-readytowear.html">Ready to Wear</a></li>
+                    <li><a href="#">Pents</a></li>
+                    <li><a href="#">Shirts</a></li>
+                    <li><a href="#">Shalwaar Kameez</a></li>
+                    <li><a href="#">Kurta Pajama</a></li>
+                    <li><a href="#">Trousers</a></li>
+                    <li><a href="#">Track Suits</a></li>
+                    <li><a href="#">Hoodies</a></li>
+                    <li><a href="#">Jackets</a></li>
                     <li><a href="#">Shoes</a></li>
                 </ul>
             </li>
             <li class="menu-item">
                 <a class="category-toggle" data-target="women">Women</a>
                 <ul class="sub-menu" id="women">
-                    <li><a href="#">Ready to Wear</a></li>
-                    <li><a href="#">Bags</a></li>
-                    <li><a href="#">Jewelry</a></li>
+                    <li><a href="women-readytowear.html">Ready to Wear</a></li>
+                    <li><a href="#">Pents</a></li>
+                    <li><a href="#">Shirts</a></li>
+                    <li><a href="#">Shalwaar Kameez</a></li>
+                    <li><a href="#">2 Piece</a></li>
+                    <li><a href="#">3 Piece</a></li>
+                    <li><a href="#">Shoes</a></li>
+                    <li><a href="#">Trousers</a></li>
+                    <li><a href="#">Track Suits</a></li>
+                    <li><a href="#">Hoodies</a></li>
+                    <li><a href="#">Jackets</a></li>
                 </ul>
             </li>
             <li class="menu-item">
@@ -346,30 +307,29 @@
         </ul>
     </nav>
 
-    <script>
-        // --- 1. HEADER SCROLL EFFECT ---
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        }, { passive: true });
+    <div class="toast" id="toast">Added to Wishlist</div>
 
-        // --- 2. HERO SLIDER LOGIC ---
+    <script>
+        // HEADER SCROLL
+        const header = document.getElementById('header');
+        function checkScroll() {
+            if (window.scrollY > 50) header.classList.add('scrolled');
+            else header.classList.remove('scrolled');
+        }
+        checkScroll();
+        window.addEventListener('scroll', checkScroll, { passive: true });
+
+        // HERO SLIDER
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
-
         function nextSlide() {
             slides[currentSlide].classList.remove('active');
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
         }
-
         setInterval(nextSlide, 5000);
 
-        // --- 3. SIDE MENU LOGIC ---
+        // SIDE MENU
         const openBtn = document.getElementById('openMenu');
         const closeBtn = document.getElementById('closeMenu');
         const sideMenu = document.getElementById('sideMenu');
@@ -385,35 +345,59 @@
             } else {
                 sideMenu.classList.add('open');
                 overlay.classList.add('active');
-                body.style.overflow = 'hidden'; /* Prevents background scrolling on mobile */
+                body.style.overflow = 'hidden'; 
             }
         }
-
         openBtn.addEventListener('click', toggleMenu);
         closeBtn.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
 
-        // --- 4. ACCORDION SUB-MENU LOGIC ---
+        // ACCORDION
         const toggles = document.querySelectorAll('.category-toggle');
-
         toggles.forEach(toggle => {
             toggle.addEventListener('click', function(e) {
                 e.preventDefault(); 
                 const targetId = this.getAttribute('data-target');
                 const targetMenu = document.getElementById(targetId);
-                
-                // Close other open menus
                 document.querySelectorAll('.sub-menu').forEach(menu => {
-                    if (menu !== targetMenu) {
-                        menu.style.maxHeight = null;
-                    }
+                    if (menu !== targetMenu) menu.style.maxHeight = null;
                 });
+                if (targetMenu.style.maxHeight) targetMenu.style.maxHeight = null;
+                else targetMenu.style.maxHeight = targetMenu.scrollHeight + "px";
+            });
+        });
 
-                // Toggle current menu
-                if (targetMenu.style.maxHeight) {
-                    targetMenu.style.maxHeight = null;
-                } else {
-                    targetMenu.style.maxHeight = targetMenu.scrollHeight + "px";
+        // SEARCH
+        const searchBtn = document.getElementById('searchBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchClose = document.getElementById('searchClose');
+        const searchInput = document.getElementById('searchInput');
+
+        searchBtn.addEventListener('click', () => {
+            searchOverlay.classList.add('open');
+            body.style.overflow = 'hidden'; 
+            setTimeout(() => searchInput.focus(), 300); 
+        });
+        function closeSearch() {
+            searchOverlay.classList.remove('open');
+            body.style.overflow = ''; 
+            searchInput.value = '';
+        }
+        searchClose.addEventListener('click', closeSearch);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && searchOverlay.classList.contains('open')) closeSearch();
+        });
+
+        // WISHLIST
+        const wishlistBtns = document.querySelectorAll('.wishlist-btn');
+        const toast = document.getElementById('toast');
+        wishlistBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation(); 
+                this.classList.toggle('active');
+                if (this.classList.contains('active')) {
+                    toast.classList.add('show');
+                    setTimeout(() => toast.classList.remove('show'), 2000);
                 }
             });
         });
