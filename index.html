@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYOFF - Luxury Clothing</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --brand-green: #6B7043; /* Olive green from logo */
+            --brand-green-dark: #4A4E2E;
+            --bg-cream: #FDFBF7;
+            --text-dark: #2C2C2C;
+            --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            --transition-smooth: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-cream);
+            color: var(--brand-green);
+            overflow-x: hidden;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            color: var(--bg-cream); /* Starts white for hero image */
+        }
+
+        header.scrolled {
+            background-color: rgba(253, 251, 247, 0.95); /* Creamy white */
+            color: var(--brand-green);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 15px 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            text-transform: lowercase;
+            font-family: serif; /* Matching the logo style */
+            cursor: pointer;
+        }
+
+        .menu-btn {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-btn span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: currentColor;
+            transition: 0.3s;
+        }
+
+        /* --- HERO SLIDER --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            animation: zoomEffect 10s infinite alternate;
+        }
+
+        @keyframes zoomEffect {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        /* Placeholder images - replace with your actual clothing photos */
+        .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop'); }
+        .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop'); }
+        .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2070&auto=format&fit=crop'); }
+
+        /* --- SIDE MENU (DRAWER) --- */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 400px;
+            height: 100vh;
+            background-color: var(--bg-cream);
+            z-index: 2000;
+            transition: var(--transition-smooth);
+            padding: 40px;
+            box-shadow: 5px 0 30px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--brand-green);
+        }
+
+        .menu-list {
+            list-style: none;
+            margin-top: 60px;
+        }
+
+        .menu-item {
+            border-bottom: 1px solid rgba(107, 112, 67, 0.2);
+        }
+
+        .menu-item > a {
+            display: block;
+            padding: 20px 0;
+            font-size: 24px;
+            text-decoration: none;
+            color: var(--brand-green);
+            font-weight: 500;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .menu-item > a:hover {
+            color: var(--brand-green-dark);
+            padding-left: 10px;
+        }
+
+        /* Sub-categories (Accordion) */
+        .sub-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .sub-menu li a {
+            display: block;
+            padding: 10px 0;
+            font-size: 16px;
+            color: var(--brand-green);
+            text-decoration: none;
+            opacity: 0.7;
+        }
+
+        .sub-menu li a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* --- OVERLAY --- */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 1500;
+            opacity: 0;
+            pointer-events: none;
+            transition: 0.5s;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* --- CONTENT SECTIONS (To allow scrolling) --- */
+        .content-section {
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .content-section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--brand-green);
+        }
+
+        .content-section p {
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .side-menu { width: 100%; }
+            header { padding: 15px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="header">
+        <div class="menu-btn" id="openMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="logo">payoff</div>
+        <div style="width: 25px;"></div> <!-- Spacer for symmetry -->
+    </header>
+
+    <!-- HERO SLIDER -->
+    <section class="hero">
+        <div class="slide active"></div>
+        <div class="slide"></div>
+        <div class="slide"></div>
+    </section>
+
+    <!-- CONTENT TO SCROLL -->
+    <section class="content-section">
+        <h2>New Collection</h2>
+        <p>Discover the latest arrivals for the season. Crafted with precision and designed for the modern individual.</p>
+    </section>
+    <section class="content-section" style="background-color: #f4f2ea;">
+        <h2>Our Philosophy</h2>
+        <p>We believe in sustainable fashion that doesn't compromise on style. Every piece tells a story.</p>
+    </section>
+    <section class="content-section">
+        <h2>Join the Club</h2>
+        <p>Sign up for exclusive access to sales and new drops.</p>
+    </section>
+
+    <!-- SIDE MENU -->
+    <div class="overlay" id="overlay"></div>
+    <nav class="side-menu" id="sideMenu">
+        <div class="close-btn" id="closeMenu">&times;</div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <a class="category-toggle" data-target="men">Men</a>
+                <ul class="sub-menu" id="men">
+                    <li><a href="#">Ready to Wear</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Shoes</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a class="category-toggle" data-target="women">Women</a>
+                <ul class="sub-menu" id="women">
+                    <li><a href="#">Ready to Wear</a></li>
+                    <li><a href="#">Bags</a></li>
+                    <li><a href="#">Jewelry</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a class="category-toggle" data-target="newin">New In</a>
+                <ul class="sub-menu" id="newin">
+                    <li><a href="#">Latest Drop</a></li>
+                    <li><a href="#">Editor's Picks</a></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <a class="category-toggle" data-target="sale">Sale</a>
+                <ul class="sub-menu" id="sale">
+                    <li><a href="#">Men's Sale</a></li>
+                    <li><a href="#">Women's Sale</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+
+    <script>
+        // --- 1. HEADER SCROLL EFFECT ---
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- 2. HERO SLIDER LOGIC ---
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Change image every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // --- 3. SIDE MENU LOGIC ---
+        const openBtn = document.getElementById('openMenu');
+        const closeBtn = document.getElementById('closeMenu');
+        const sideMenu = document.getElementById('sideMenu');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            sideMenu.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        openBtn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // --- 4. ACCORDION SUB-MENU LOGIC ---
+        const toggles = document.querySelectorAll('.category-toggle');
+
+        toggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent link jump
+                const targetId = this.getAttribute('data-target');
+                const targetMenu = document.getElementById(targetId);
+                
+                // Close other open menus (optional, for cleaner look)
+                document.querySelectorAll('.sub-menu').forEach(menu => {
+                    if (menu !== targetMenu) {
+                        menu.style.maxHeight = null;
+                    }
+                });
+
+                // Toggle current menu
+                if (targetMenu.style.maxHeight) {
+                    targetMenu.style.maxHeight = null;
+                } else {
+                    targetMenu.style.maxHeight = targetMenu.scrollHeight + "px";
+                }
+            });
+        });
+    </script>
+</body>
+</html>
