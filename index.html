@@ -2,13 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- 
-      THE MAGIC FOR IDENTICAL LOOK: 
-      We set the viewport width to a fixed 1200px (standard desktop width).
-      The mobile browser will automatically zoom out to fit the whole 1200px width into the phone screen.
-      This guarantees a 10/10 identical layout to the PC version.
-    -->
-    <meta name="viewport" content="width=1200, initial-scale=0.3, maximum-scale=1.0, user-scalable=yes">
+    <!-- Standard responsive viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FDFBF7">
     <title>PAYOFF - Luxury Clothing</title>
     <style>
@@ -34,8 +29,6 @@
             background-color: var(--bg-cream);
             color: var(--brand-green);
             overflow-x: hidden;
-            /* Prevents text from wrapping weirdly on scaled mobile */
-            min-width: 1200px; 
         }
 
         /* --- HEADER --- */
@@ -44,42 +37,48 @@
             top: 0;
             left: 0;
             width: 100%;
-            padding: 20px 40px;
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
             transition: var(--transition-smooth);
-            color: var(--bg-cream); 
+            color: var(--bg-cream); /* Starts white for hero image */
         }
 
         header.scrolled {
             background-color: rgba(253, 251, 247, 0.95);
             color: var(--brand-green);
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            padding: 15px 40px;
+            padding: 15px 30px;
             backdrop-filter: blur(10px);
         }
 
         .logo {
-            font-size: 28px;
+            font-size: clamp(24px, 5vw, 32px); /* Scales smoothly */
             font-weight: 700;
             letter-spacing: -1px;
             text-transform: lowercase;
             font-family: serif; 
             cursor: pointer;
+            z-index: 1001;
         }
 
+        /* Hamburger Menu Button */
         .menu-btn {
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            justify-content: center;
+            gap: 6px;
+            width: 44px;
+            height: 44px;
+            z-index: 1001;
         }
 
         .menu-btn span {
             display: block;
-            width: 25px;
+            width: 28px;
             height: 2px;
             background-color: currentColor;
             transition: 0.3s;
@@ -87,7 +86,9 @@
 
         /* --- HERO SLIDER --- */
         .hero {
+            /* Uses dynamic viewport height to account for mobile browser bars */
             height: 100vh;
+            height: 100dvh; 
             width: 100%;
             position: relative;
             overflow: hidden;
@@ -100,39 +101,44 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 1.2s ease-in-out;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
         }
 
         .slide.active {
             opacity: 1;
-            animation: zoomEffect 10s infinite alternate;
+            animation: zoomEffect 12s infinite alternate;
         }
 
         @keyframes zoomEffect {
             from { transform: scale(1); }
-            to { transform: scale(1.1); }
+            to { transform: scale(1.08); }
         }
 
+        /* Placeholder images */
         .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop'); }
         .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop'); }
         .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2070&auto=format&fit=crop'); }
 
-        /* --- SIDE MENU (DRAWER) - Kept identical to PC --- */
+        /* --- SIDE MENU (DRAWER) --- */
         .side-menu {
             position: fixed;
             top: 0;
             left: -100%;
-            /* Width is fixed at 400px, even on mobile, because of the scaling trick */
-            width: 400px; 
+            /* On Mobile: Full width. On PC: 400px (handled in media query) */
+            width: 100%; 
             height: 100vh;
+            height: 100dvh;
             background-color: var(--bg-cream);
             z-index: 2000;
             transition: var(--transition-smooth);
-            padding: 40px;
+            padding: 40px 30px;
             box-shadow: 5px 0 30px rgba(0,0,0,0.1);
             overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
 
         .side-menu.open {
@@ -142,11 +148,16 @@
         .close-btn {
             position: absolute;
             top: 20px;
-            right: 20px;
-            font-size: 30px;
+            right: 25px;
+            font-size: 40px;
+            line-height: 1;
             cursor: pointer;
             color: var(--brand-green);
-            line-height: 1;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-list {
@@ -155,13 +166,13 @@
         }
 
         .menu-item {
-            border-bottom: 1px solid rgba(107, 112, 67, 0.2);
+            border-bottom: 1px solid rgba(107, 112, 67, 0.15);
         }
 
         .menu-item > a {
             display: block;
             padding: 20px 0;
-            font-size: 24px;
+            font-size: clamp(20px, 6vw, 26px);
             text-decoration: none;
             color: var(--brand-green);
             font-weight: 500;
@@ -174,21 +185,22 @@
             padding-left: 10px;
         }
 
+        /* Sub-categories (Accordion) */
         .sub-menu {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-out;
             list-style: none;
-            padding-left: 20px;
+            padding-left: 15px;
         }
 
         .sub-menu li a {
             display: block;
-            padding: 10px 0;
-            font-size: 16px;
+            padding: 12px 0;
+            font-size: clamp(15px, 4vw, 18px);
             color: var(--brand-green);
             text-decoration: none;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         .sub-menu li a:hover {
@@ -208,6 +220,7 @@
             opacity: 0;
             pointer-events: none;
             transition: 0.5s;
+            backdrop-filter: blur(3px);
         }
 
         .overlay.active {
@@ -217,12 +230,12 @@
 
         /* --- CONTENT SECTIONS --- */
         .content-section {
-            padding: 100px 40px;
+            padding: 80px 30px;
             text-align: center;
         }
 
         .content-section h2 {
-            font-size: 32px;
+            font-size: clamp(28px, 6vw, 36px);
             margin-bottom: 20px;
             color: var(--brand-green);
         }
@@ -232,6 +245,32 @@
             margin: 0 auto;
             line-height: 1.6;
             color: #555;
+            font-size: clamp(15px, 4vw, 18px);
+        }
+
+        /* --- DESKTOP OVERRIDES --- */
+        @media (min-width: 768px) {
+            header {
+                padding: 25px 50px;
+            }
+            
+            header.scrolled {
+                padding: 20px 50px;
+            }
+
+            .side-menu {
+                width: 400px; /* Fixed width on PC */
+                padding: 50px;
+            }
+
+            .close-btn {
+                top: 30px;
+                right: 30px;
+            }
+
+            .content-section {
+                padding: 120px 40px;
+            }
         }
     </style>
 </head>
@@ -245,7 +284,7 @@
             <span></span>
         </div>
         <div class="logo">payoff</div>
-        <div style="width: 25px;"></div> 
+        <div style="width: 28px;"></div> <!-- Spacer for symmetry -->
     </header>
 
     <!-- HERO SLIDER -->
@@ -335,10 +374,19 @@
         const closeBtn = document.getElementById('closeMenu');
         const sideMenu = document.getElementById('sideMenu');
         const overlay = document.getElementById('overlay');
+        const body = document.body;
 
         function toggleMenu() {
-            sideMenu.classList.toggle('open');
-            overlay.classList.toggle('active');
+            const isOpen = sideMenu.classList.contains('open');
+            if (isOpen) {
+                sideMenu.classList.remove('open');
+                overlay.classList.remove('active');
+                body.style.overflow = ''; 
+            } else {
+                sideMenu.classList.add('open');
+                overlay.classList.add('active');
+                body.style.overflow = 'hidden'; /* Prevents background scrolling on mobile */
+            }
         }
 
         openBtn.addEventListener('click', toggleMenu);
@@ -354,12 +402,14 @@
                 const targetId = this.getAttribute('data-target');
                 const targetMenu = document.getElementById(targetId);
                 
+                // Close other open menus
                 document.querySelectorAll('.sub-menu').forEach(menu => {
                     if (menu !== targetMenu) {
                         menu.style.maxHeight = null;
                     }
                 });
 
+                // Toggle current menu
                 if (targetMenu.style.maxHeight) {
                     targetMenu.style.maxHeight = null;
                 } else {
