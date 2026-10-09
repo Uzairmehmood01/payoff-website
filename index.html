@@ -23,7 +23,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: var(--font-sans); background-color: var(--bg-cream); color: var(--brand-green); overflow-x: hidden; }
 
-        /* HEADER */
+        /* --- HEADER --- */
         header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-smooth); color: var(--bg-cream); }
         header.scrolled { background-color: rgba(253, 251, 247, 0.95); color: var(--brand-green); box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 15px 30px; backdrop-filter: blur(10px); }
         .header-left, .header-right { display: flex; align-items: center; gap: 15px; flex: 1; }
@@ -35,16 +35,16 @@
         .menu-btn { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 40px; height: 40px; cursor: pointer; }
         .menu-btn span { display: block; width: 24px; height: 2px; background-color: currentColor; transition: 0.3s; }
 
-        /* HERO */
+        /* --- HERO --- */
         .hero { height: 100vh; height: 100dvh; width: 100%; position: relative; overflow: hidden; }
-        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.2s ease-in-out; background-size: cover; background-position: center; }
-        .slide.active { opacity: 1; animation: zoomEffect 12s infinite alternate; }
-        @keyframes zoomEffect { from { transform: scale(1); } to { transform: scale(1.08); } }
+        .slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.5s ease-in-out; background-size: cover; background-position: center; }
+        .slide.active { opacity: 1; animation: zoomEffect 15s infinite alternate; }
+        @keyframes zoomEffect { from { transform: scale(1); } to { transform: scale(1.1); } }
         .slide:nth-child(1) { background-image: url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2070&auto=format&fit=crop'); }
         .slide:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop'); }
         .slide:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=2070&auto=format&fit=crop'); }
 
-        /* SEARCH OVERLAY */
+        /* --- SEARCH OVERLAY --- */
         .search-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; height: 100dvh; background-color: var(--bg-cream); z-index: 3000; transform: translateY(-100%); transition: var(--transition-smooth); overflow-y: auto; padding: 40px 20px; display: flex; flex-direction: column; align-items: center; }
         .search-overlay.open { transform: translateY(0); }
         .search-logo { font-family: var(--font-serif); font-size: clamp(28px, 6vw, 48px); font-weight: 700; color: var(--brand-green); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 50px; margin-top: 20px; text-align: center; }
@@ -61,24 +61,41 @@
         .search-list li a { text-decoration: none; color: var(--brand-green); font-size: clamp(14px, 3vw, 16px); font-weight: 400; transition: 0.3s; padding: 5px 0; display: block; }
         .search-list li a:hover { color: var(--brand-green-dark); text-decoration: underline; }
 
-        /* COLLECTION GRID */
+        /* --- SCROLL REVEAL ANIMATION --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- NEW COLLECTION GRID --- */
         .collection-section { padding: 100px 30px; max-width: 1400px; margin: 0 auto; }
-        .section-title { text-align: center; font-size: clamp(32px, 6vw, 52px); font-family: var(--font-serif); margin-bottom: 60px; font-weight: 700; letter-spacing: 1px; color: var(--brand-green); }
+        .section-header { text-align: center; margin-bottom: 60px; position: relative; }
+        .section-title { font-size: clamp(32px, 6vw, 52px); font-family: var(--font-serif); font-weight: 700; letter-spacing: 1px; color: var(--brand-green); display: inline-block; position: relative; }
+        .live-dot { display: inline-block; width: 10px; height: 10px; background-color: #d9534f; border-radius: 50%; margin-left: 10px; animation: pulse 2s infinite; vertical-align: middle; }
+        @keyframes pulse { 0% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.7; } 100% { transform: scale(1); opacity: 1; } }
+
         .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
         .product-card { cursor: pointer; position: relative; }
         .product-image-container { position: relative; overflow: hidden; background-color: var(--bg-card); aspect-ratio: 3/4; }
         .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-        .product-card:hover .product-image { transform: scale(1.05); }
+        .product-card:hover .product-image { transform: scale(1.08); }
+        
         .wishlist-btn { position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; background-color: rgba(253, 251, 247, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; z-index: 10; border: none; backdrop-filter: blur(4px); }
         .wishlist-btn svg { width: 18px; height: 18px; stroke: var(--brand-green); fill: none; transition: 0.3s; }
         .wishlist-btn.active svg { fill: var(--brand-green); stroke: var(--brand-green); }
         .wishlist-btn:hover { background-color: var(--bg-cream); transform: scale(1.1); }
+
+        /* Quick View Overlay */
+        .quick-view-overlay { position: absolute; bottom: -60px; left: 0; width: 100%; background-color: rgba(107, 112, 67, 0.95); color: var(--bg-cream); padding: 18px; text-align: center; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: bottom 0.4s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; z-index: 5; backdrop-filter: blur(4px); }
+        .product-card:hover .quick-view-overlay { bottom: 0; }
+
         .product-info { padding: 15px 0; text-align: center; }
         .product-name { font-size: clamp(14px, 3vw, 16px); font-weight: 500; color: var(--text-dark); margin-bottom: 5px; }
         .product-price { font-size: clamp(13px, 3vw, 15px); color: var(--text-muted); }
 
-        /* EDITORIAL */
+        /* New Badge */
+        .new-badge { position: absolute; top: 15px; left: 15px; background-color: var(--brand-green); color: var(--bg-cream); font-size: 10px; font-weight: 600; letter-spacing: 1px; padding: 5px 10px; text-transform: uppercase; z-index: 10; }
+
+        /* --- EDITORIAL BANNER --- */
         .editorial-section { position: relative; width: 100%; height: 80vh; min-height: 500px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         .editorial-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=2071&auto=format&fit=crop'); background-size: cover; background-position: center; transition: transform 10s ease-out; }
         .editorial-section:hover .editorial-bg { transform: scale(1.05); }
@@ -88,7 +105,35 @@
         .editorial-btn { display: inline-block; padding: 18px 50px; background-color: transparent; color: var(--bg-cream); text-decoration: none; font-size: 14px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; border: 1px solid var(--bg-cream); }
         .editorial-btn:hover { background-color: var(--bg-cream); color: var(--brand-green); }
 
-        /* SIDE MENU */
+        /* --- INTERACTIVE CLOTHING CATEGORIES (TABS) --- */
+        .categories-section { padding: 100px 30px; max-width: 1400px; margin: 0 auto; text-align: center; }
+        .categories-title { font-family: var(--font-serif); font-size: clamp(32px, 6vw, 52px); font-weight: 700; letter-spacing: 1px; color: var(--brand-green); margin-bottom: 20px; }
+        .categories-subtitle { font-size: clamp(14px, 3vw, 16px); color: var(--text-muted); margin-bottom: 40px; letter-spacing: 1px; }
+        
+        .category-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 50px; flex-wrap: wrap; }
+        .cat-tab { background: transparent; border: 1px solid rgba(107, 112, 67, 0.3); color: var(--brand-green); padding: 12px 24px; font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: 0.3s; font-family: var(--font-sans); }
+        .cat-tab:hover { background-color: rgba(107, 112, 67, 0.05); }
+        .cat-tab.active { background-color: var(--brand-green); color: var(--bg-cream); border-color: var(--brand-green); }
+
+        .category-content { display: none; animation: fadeIn 0.6s ease-in-out forwards; }
+        .category-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        @media (min-width: 768px) { .category-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
+
+        /* --- SPLIT EDITORIAL (SHOP THE LOOK) --- */
+        .split-editorial { display: flex; flex-direction: column; background-color: var(--bg-card); }
+        @media (min-width: 768px) { .split-editorial { flex-direction: row; height: 80vh; min-height: 600px; } }
+        .split-image { width: 100%; height: 60vh; background-size: cover; background-position: center; }
+        .split-text { width: 100%; padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; background-color: var(--bg-cream); }
+        @media (min-width: 768px) { .split-image { width: 50%; height: 100%; } .split-text { width: 50%; padding: 80px; } }
+        .split-text h3 { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 42px); font-weight: 400; color: var(--brand-green); margin-bottom: 20px; letter-spacing: 1px; }
+        .split-text p { font-size: clamp(14px, 3vw, 16px); color: var(--text-muted); line-height: 1.8; margin-bottom: 40px; max-width: 450px; }
+        .split-text .btn-outline { display: inline-block; padding: 15px 40px; border: 1px solid var(--brand-green); color: var(--brand-green); text-decoration: none; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; }
+        .split-text .btn-outline:hover { background-color: var(--brand-green); color: var(--bg-cream); }
+
+        /* --- SIDE MENU --- */
         .side-menu { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; height: 100dvh; background-color: var(--bg-cream); z-index: 2000; transition: var(--transition-smooth); padding: 40px 30px; box-shadow: 5px 0 30px rgba(0,0,0,0.1); overflow-y: auto; display: flex; flex-direction: column; }
         .side-menu.open { left: 0; }
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; line-height: 1; cursor: pointer; color: var(--brand-green); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
@@ -100,7 +145,7 @@
         .sub-menu li a { display: block; padding: 12px 0; font-size: clamp(15px, 4vw, 18px); color: var(--brand-green); text-decoration: none; opacity: 0.8; }
         .sub-menu li a:hover { opacity: 1; text-decoration: underline; }
 
-        /* FOOTER */
+        /* --- FOOTER --- */
         .footer { background-color: var(--bg-cream); padding: 60px 30px 40px; border-top: 1px solid rgba(107, 112, 67, 0.1); }
         .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 40px; }
         @media (min-width: 768px) { .footer-container { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
@@ -120,8 +165,8 @@
         .footer-bottom-right a { text-decoration: none; color: var(--text-muted); font-size: 14px; transition: 0.3s; }
         .footer-bottom-right a:hover { color: var(--brand-green); text-decoration: underline; }
 
-        /* TOAST & OVERLAY */
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background-color: var(--brand-green); color: var(--bg-cream); padding: 15px 30px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 3000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0; pointer-events: none; }
+        /* --- TOAST & OVERLAY --- */
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background-color: var(--brand-green); color: var(--bg-cream); padding: 15px 30px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 3000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0; pointer-events: none; display: flex; align-items: center; gap: 10px; }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1500; opacity: 0; pointer-events: none; transition: 0.5s; backdrop-filter: blur(3px); }
         .overlay.active { opacity: 1; pointer-events: auto; }
@@ -133,6 +178,7 @@
             .close-btn { top: 30px; right: 30px; }
             .collection-section { padding: 120px 50px; }
             .editorial-section { height: 90vh; }
+            .categories-section { padding: 120px 50px; }
         }
     </style>
 </head>
@@ -140,20 +186,12 @@
 
     <header id="header">
         <div class="header-left">
-            <div class="menu-btn" id="openMenu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <div class="menu-btn" id="openMenu"><span></span><span></span><span></span></div>
         </div>
         <div class="logo">payoff</div>
         <div class="header-right">
-            <div class="icon-btn" id="searchBtn">
-                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </div>
-            <div class="icon-btn">
-                <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            </div>
+            <div class="icon-btn" id="searchBtn"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></div>
+            <div class="icon-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
         </div>
     </header>
 
@@ -168,11 +206,11 @@
             <div class="search-list-column">
                 <div class="search-list-title">Trending Searches</div>
                 <ul class="search-list">
-                    <li><a href="#">Wallets</a></li>
-                    <li><a href="#">Speedy</a></li>
-                    <li><a href="#">Neverfull</a></li>
-                    <li><a href="#">Pochette</a></li>
-                    <li><a href="#">Imagination</a></li>
+                    <li><a href="#">Shirts</a></li>
+                    <li><a href="#">Shalwaar Kameez</a></li>
+                    <li><a href="#">Kurta Pajama</a></li>
+                    <li><a href="#">Hoodies</a></li>
+                    <li><a href="#">Jackets</a></li>
                 </ul>
             </div>
             <div class="search-list-column">
@@ -180,9 +218,9 @@
                 <ul class="search-list">
                     <li><a href="#">Winter Coats</a></li>
                     <li><a href="#">Cashmere Sweaters</a></li>
-                    <li><a href="#">Silk Scarves</a></li>
-                    <li><a href="#">Leather Boots</a></li>
                     <li><a href="#">Wool Blazers</a></li>
+                    <li><a href="#">Silk Scarves</a></li>
+                    <li><a href="#">Leather Jackets</a></li>
                 </ul>
             </div>
         </div>
@@ -195,14 +233,18 @@
         <div class="slide"></div>
     </section>
 
-    <!-- NEW COLLECTION GRID -->
-    <section class="collection-section" id="collection">
-        <h2 class="section-title">New Collection</h2>
+    <!-- NEW COLLECTION GRID (With Live Dot) -->
+    <section class="collection-section reveal" id="collection">
+        <div class="section-header">
+            <h2 class="section-title">New Collection <span class="live-dot"></span></h2>
+        </div>
         <div class="product-grid">
             <div class="product-card">
                 <div class="product-image-container">
+                    <div class="new-badge">New</div>
                     <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" alt="Product 1" class="product-image">
                     <button class="wishlist-btn" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                    <div class="quick-view-overlay">Quick View</div>
                 </div>
                 <div class="product-info"><div class="product-name">Tailored Wool Coat</div><div class="product-price">$1,250</div></div>
             </div>
@@ -210,13 +252,16 @@
                 <div class="product-image-container">
                     <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?q=80&w=800&auto=format&fit=crop" alt="Product 2" class="product-image">
                     <button class="wishlist-btn" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                    <div class="quick-view-overlay">Quick View</div>
                 </div>
                 <div class="product-info"><div class="product-name">Silk Evening Dress</div><div class="product-price">$2,100</div></div>
             </div>
             <div class="product-card">
                 <div class="product-image-container">
+                    <div class="new-badge">New</div>
                     <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800&auto=format&fit=crop" alt="Product 3" class="product-image">
                     <button class="wishlist-btn" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                    <div class="quick-view-overlay">Quick View</div>
                 </div>
                 <div class="product-info"><div class="product-name">Leather Handbag</div><div class="product-price">$3,400</div></div>
             </div>
@@ -224,19 +269,275 @@
                 <div class="product-image-container">
                     <img src="https://images.unsplash.com/photo-1520975954732-35dd22299614?q=80&w=800&auto=format&fit=crop" alt="Product 4" class="product-image">
                     <button class="wishlist-btn" aria-label="Add to wishlist"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                    <div class="quick-view-overlay">Quick View</div>
                 </div>
                 <div class="product-info"><div class="product-name">Cashmere Scarf</div><div class="product-price">$650</div></div>
             </div>
         </div>
     </section>
 
-    <!-- EDITORIAL -->
-    <section class="editorial-section">
+    <!-- EDITORIAL BANNER (WINTER ESCAPE) -->
+    <section class="editorial-section reveal">
         <div class="editorial-bg"></div>
         <div class="editorial-content">
             <h2 class="editorial-title">The Winter Escape</h2>
             <p class="editorial-subtitle">Discover the new seasonal campaign</p>
             <a href="#" class="editorial-btn">Explore the Collection</a>
+        </div>
+    </section>
+
+    <!-- --- INTERACTIVE CLOTHING CATEGORIES (TABS) --- -->
+    <section class="categories-section reveal">
+        <h2 class="categories-title">Ready to Wear</h2>
+        <p class="categories-subtitle">Explore our curated collections for Men & Women</p>
+
+        <!-- Tab Bar -->
+        <div class="category-tabs">
+            <button class="cat-tab active" data-tab="tab-men-shirts">Men's Shirts</button>
+            <button class="cat-tab" data-tab="tab-men-pents">Men's Pents</button>
+            <button class="cat-tab" data-tab="tab-women-shalwaar">Women's Shalwaar Kameez</button>
+            <button class="cat-tab" data-tab="tab-women-3piece">Women's 3 Piece</button>
+            <button class="cat-tab" data-tab="tab-hoodies">Hoodies</button>
+            <button class="cat-tab" data-tab="tab-jackets">Jackets</button>
+        </div>
+
+        <!-- Men's Shirts Content -->
+        <div class="category-content active" id="tab-men-shirts">
+            <div class="category-grid">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop" alt="Men Shirt 1" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Classic Cotton Shirt</div><div class="product-price">$120</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop" alt="Men Shirt 2" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Linen Summer Shirt</div><div class="product-price">$140</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=800&auto=format&fit=crop" alt="Men Shirt 3" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Oxford Button-Down</div><div class="product-price">$130</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Men Shirt 4" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Printed Casual Shirt</div><div class="product-price">$110</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Men's Pents Content -->
+        <div class="category-content" id="tab-men-pents">
+            <div class="category-grid">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=800&auto=format&fit=crop" alt="Men Pents 1" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Tailored Pents</div><div class="product-price">$180</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=800&auto=format&fit=crop" alt="Men Pents 2" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Slim Fit Chinos</div><div class="product-price">$160</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?q=80&w=800&auto=format&fit=crop" alt="Men Pents 3" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Formal Wool Pents</div><div class="product-price">$220</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" alt="Men Pents 4" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Casual Trousers</div><div class="product-price">$150</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Women's Shalwaar Kameez Content -->
+        <div class="category-content" id="tab-women-shalwaar">
+            <div class="category-grid">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Women Shalwaar 1" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Embroidered Shalwaar Kameez</div><div class="product-price">$300</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" alt="Women Shalwaar 2" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Classic Shalwaar Kameez</div><div class="product-price">$250</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=800&auto=format&fit=crop" alt="Women Shalwaar 3" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Festive Shalwaar Kameez</div><div class="product-price">$350</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?q=80&w=800&auto=format&fit=crop" alt="Women Shalwaar 4" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Silk Shalwaar Kameez</div><div class="product-price">$400</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Women's 3 Piece Content -->
+        <div class="category-content" id="tab-women-3piece">
+            <div class="category-grid">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" alt="3 Piece 1" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Luxury 3 Piece</div><div class="product-price">$380</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="3 Piece 2" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Bridal 3 Piece</div><div class="product-price">$550</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=800&auto=format&fit=crop" alt="3 Piece 3" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Designer 3 Piece</div><div class="product-price">$420</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?q=80&w=800&auto=format&fit=crop" alt="3 Piece 4" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Embroidered 3 Piece</div><div class="product-price">$460</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hoodies Content -->
+        <div class="category-content" id="tab-hoodies">
+            <div class="category-grid">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" alt="Hoodie 1" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Essential Hoodie</div><div class="product-price">$110</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=800&auto=format&fit=crop" alt="Hoodie 2" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Zip-Up Hoodie</div><div class="product-price">$130</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?q=80&w=800&auto=format&fit=crop" alt="Hoodie 3" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Oversized Hoodie</div><div class="product-price">$140</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Hoodie 4" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Sport Hoodie</div><div class="product-price">$120</div></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Jackets Content -->
+        <div class="category-content" id="tab-jackets">
+            <div class="category-grid">
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop" alt="Jacket 1" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Leather Jacket</div><div class="product-price">$450</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" alt="Jacket 2" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Wool Coat</div><div class="product-price">$380</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1548126032-079a0fb0099d?q=80&w=800&auto=format&fit=crop" alt="Jacket 3" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Bomber Jacket</div><div class="product-price">$320</div></div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop" alt="Jacket 4" class="product-image">
+                        <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                        <div class="quick-view-overlay">Quick View</div>
+                    </div>
+                    <div class="product-info"><div class="product-name">Puffer Jacket</div><div class="product-price">$400</div></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- SPLIT EDITORIAL (SHOP THE LOOK) -->
+    <section class="split-editorial reveal">
+        <div class="split-image" style="background-image: url('https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?q=80&w=2070&auto=format&fit=crop');"></div>
+        <div class="split-text">
+            <h3>Shop the Look</h3>
+            <p>Our stylists have curated the perfect winter wardrobe. Discover how to layer our signature pieces for a sophisticated, modern silhouette.</p>
+            <a href="#" class="btn-outline">View Editorial</a>
         </div>
     </section>
 
@@ -259,55 +560,28 @@
     <nav class="side-menu" id="sideMenu">
         <div class="close-btn" id="closeMenu">&times;</div>
         <ul class="menu-list">
-            <li class="menu-item">
-                <a class="category-toggle" data-target="men">Men</a>
+            <li class="menu-item"><a class="category-toggle" data-target="men">Men</a>
                 <ul class="sub-menu" id="men">
                     <li><a href="men-readytowear.html">Ready to Wear</a></li>
-                    <li><a href="#">Pents</a></li>
-                    <li><a href="#">Shirts</a></li>
-                    <li><a href="#">Shalwaar Kameez</a></li>
-                    <li><a href="#">Kurta Pajama</a></li>
-                    <li><a href="#">Trousers</a></li>
-                    <li><a href="#">Track Suits</a></li>
-                    <li><a href="#">Hoodies</a></li>
-                    <li><a href="#">Jackets</a></li>
-                    <li><a href="#">Shoes</a></li>
+                    <li><a href="#">Pents</a></li><li><a href="#">Shirts</a></li><li><a href="#">Shalwaar Kameez</a></li><li><a href="#">Kurta Pajama</a></li><li><a href="#">Trousers</a></li><li><a href="#">Track Suits</a></li><li><a href="#">Hoodies</a></li><li><a href="#">Jackets</a></li><li><a href="#">Shoes</a></li>
                 </ul>
             </li>
-            <li class="menu-item">
-                <a class="category-toggle" data-target="women">Women</a>
+            <li class="menu-item"><a class="category-toggle" data-target="women">Women</a>
                 <ul class="sub-menu" id="women">
                     <li><a href="women-readytowear.html">Ready to Wear</a></li>
-                    <li><a href="#">Pents</a></li>
-                    <li><a href="#">Shirts</a></li>
-                    <li><a href="#">Shalwaar Kameez</a></li>
-                    <li><a href="#">2 Piece</a></li>
-                    <li><a href="#">3 Piece</a></li>
-                    <li><a href="#">Shoes</a></li>
-                    <li><a href="#">Trousers</a></li>
-                    <li><a href="#">Track Suits</a></li>
-                    <li><a href="#">Hoodies</a></li>
-                    <li><a href="#">Jackets</a></li>
+                    <li><a href="#">Pents</a></li><li><a href="#">Shirts</a></li><li><a href="#">Shalwaar Kameez</a></li><li><a href="#">2 Piece</a></li><li><a href="#">3 Piece</a></li><li><a href="#">Shoes</a></li><li><a href="#">Trousers</a></li><li><a href="#">Track Suits</a></li><li><a href="#">Hoodies</a></li><li><a href="#">Jackets</a></li>
                 </ul>
             </li>
-            <li class="menu-item">
-                <a class="category-toggle" data-target="newin">New In</a>
-                <ul class="sub-menu" id="newin">
-                    <li><a href="#">Latest Drop</a></li>
-                    <li><a href="#">Editor's Picks</a></li>
-                </ul>
+            <li class="menu-item"><a class="category-toggle" data-target="newin">New In</a>
+                <ul class="sub-menu" id="newin"><li><a href="#">Latest Drop</a></li><li><a href="#">Editor's Picks</a></li></ul>
             </li>
-            <li class="menu-item">
-                <a class="category-toggle" data-target="sale">Sale</a>
-                <ul class="sub-menu" id="sale">
-                    <li><a href="#">Men's Sale</a></li>
-                    <li><a href="#">Women's Sale</a></li>
-                </ul>
+            <li class="menu-item"><a class="category-toggle" data-target="sale">Sale</a>
+                <ul class="sub-menu" id="sale"><li><a href="#">Men's Sale</a></li><li><a href="#">Women's Sale</a></li></ul>
             </li>
         </ul>
     </nav>
 
-    <div class="toast" id="toast">Added to Wishlist</div>
+    <div class="toast" id="toast"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Added to Bag</div>
 
     <script>
         // HEADER SCROLL
@@ -327,7 +601,7 @@
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].classList.add('active');
         }
-        setInterval(nextSlide, 5000);
+        setInterval(nextSlide, 6000);
 
         // SIDE MENU
         const openBtn = document.getElementById('openMenu');
@@ -390,15 +664,47 @@
 
         // WISHLIST
         const wishlistBtns = document.querySelectorAll('.wishlist-btn');
-        const toast = document.getElementById('toast');
         wishlistBtns.forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.stopPropagation(); 
                 this.classList.toggle('active');
-                if (this.classList.contains('active')) {
-                    toast.classList.add('show');
-                    setTimeout(() => toast.classList.remove('show'), 2000);
+            });
+        });
+
+        // --- INTERACTIVE TABS (CLOTHING CATEGORIES) ---
+        const catTabs = document.querySelectorAll('.cat-tab');
+        const catContents = document.querySelectorAll('.category-content');
+
+        catTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                catTabs.forEach(t => t.classList.remove('active'));
+                catContents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const targetId = tab.getAttribute('data-tab');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // --- SCROLL REVEAL ANIMATION (HCI: Aesthetic & Minimalist Design) ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- QUICK VIEW / ADD TO CART TOAST ---
+        const quickViewBtns = document.querySelectorAll('.quick-view-overlay');
+        const toast = document.getElementById('toast');
+        quickViewBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), 2000);
             });
         });
     </script>
