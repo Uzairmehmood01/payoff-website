@@ -13,22 +13,22 @@
             --brand-green: #6B7043; 
             --brand-green-dark: #4A4E2E;
             --bg-cream: #FDFBF7;
-            --bg-card: #F4F2EA;
+            --bg-card: #F4F1EA;
             --text-dark: #2C2C2C;
             --text-muted: #777;
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Inter', sans-serif;
-            --transition-smooth: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            --transition-luxury: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
         body { font-family: var(--font-sans); background-color: var(--bg-cream); color: var(--brand-green); overflow-x: hidden; }
 
         /* HEADER */
-        header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-smooth); color: var(--bg-cream); }
-        header.scrolled { background-color: rgba(253, 251, 247, 0.95); color: var(--brand-green); box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 15px 30px; backdrop-filter: blur(10px); }
-        .header-left, .header-right { display: flex; align-items: center; gap: 15px; flex: 1; }
+        header { position: fixed; top: 0; left: 0; width: 100%; padding: 20px 30px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; transition: var(--transition-luxury); color: var(--bg-cream); }
+        header.scrolled { background-color: rgba(253, 251, 247, 0.98); color: var(--brand-green); box-shadow: 0 4px 30px rgba(0,0,0,0.03); padding: 15px 30px; backdrop-filter: blur(10px); }
+        .header-left, .header-right { display: flex; align-items: center; gap: 20px; flex: 1; }
         .header-right { justify-content: flex-end; }
-        .logo { font-size: clamp(22px, 5vw, 30px); font-weight: 700; letter-spacing: -1px; text-transform: lowercase; font-family: var(--font-serif); cursor: pointer; flex: 1; text-align: center; }
+        .logo { font-size: clamp(22px, 5vw, 32px); font-weight: 700; letter-spacing: -1px; text-transform: lowercase; font-family: var(--font-serif); cursor: pointer; flex: 1; text-align: center; }
         .icon-btn { cursor: pointer; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; transition: 0.3s; position: relative; }
         .icon-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.5; transition: 0.3s; }
         .icon-btn:hover svg { transform: scale(1.1); }
@@ -42,41 +42,51 @@
         .category-banner-title { font-family: var(--font-serif); font-size: clamp(48px, 12vw, 110px); font-weight: 400; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.3); }
         .category-banner-subtitle { font-size: clamp(14px, 3vw, 18px); font-weight: 300; letter-spacing: 5px; text-transform: uppercase; opacity: 0.8; text-shadow: 0 2px 10px rgba(0,0,0,0.3); }
 
-        /* SLIDER SECTION */
-        .slider-section { padding: 60px 0; background-color: var(--bg-cream); }
-        .slider-header { text-align: center; margin-bottom: 40px; padding: 0 20px; }
-        .slider-title { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 42px); font-weight: 700; color: var(--brand-green); letter-spacing: 2px; text-transform: uppercase; }
-        .slider-container { position: relative; display: flex; align-items: center; }
-        .product-slider { display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding: 0 30px 20px; scrollbar-width: none; -ms-overflow-style: none; }
-        .product-slider::-webkit-scrollbar { display: none; }
-        .product-card { flex: 0 0 280px; cursor: pointer; position: relative; background-color: var(--bg-card); }
-        @media (min-width: 768px) { .product-card { flex: 0 0 320px; } }
-        .product-image-container { position: relative; overflow: hidden; aspect-ratio: 3/4; }
-        .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
-        .product-card:hover .product-image { transform: scale(1.05); }
-        .wishlist-btn { position: absolute; top: 15px; right: 15px; width: 36px; height: 36px; background-color: rgba(253, 251, 247, 0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s; z-index: 10; border: none; backdrop-filter: blur(4px); }
-        .wishlist-btn svg { width: 18px; height: 18px; stroke: var(--brand-green); fill: none; transition: 0.3s; }
+        /* CATEGORY SECTIONS (LV STYLE) */
+        .category-section { padding: 80px 20px 40px; max-width: 1600px; margin: 0 auto; }
+        .category-header { text-align: center; margin-bottom: 50px; }
+        .category-title { font-family: var(--font-serif); font-size: clamp(28px, 5vw, 42px); font-weight: 700; color: var(--brand-green); letter-spacing: 3px; text-transform: uppercase; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; }
+        @media (min-width: 768px) { .product-grid { grid-template-columns: repeat(4, 1fr); } }
+
+        .product-card { cursor: pointer; position: relative; padding: 0 0 40px 0; }
+        .product-image-container { position: relative; overflow: hidden; background-color: var(--bg-card); aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; }
+        .product-image { width: 85%; height: 85%; object-fit: contain; transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1); }
+        .product-card:hover .product-image { transform: scale(1.06); }
+        
+        .wishlist-btn { position: absolute; top: 20px; right: 20px; width: 32px; height: 32px; background: transparent; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 10; opacity: 0.6; transition: 0.3s; }
+        .wishlist-btn:hover { opacity: 1; transform: scale(1.1); }
+        .wishlist-btn svg { width: 20px; height: 20px; stroke: var(--brand-green); fill: none; stroke-width: 1.5; transition: 0.3s; }
         .wishlist-btn.active svg { fill: var(--brand-green); stroke: var(--brand-green); }
-        .wishlist-btn:hover { background-color: var(--bg-cream); transform: scale(1.1); }
-        .product-info { padding: 15px 0; text-align: center; }
-        .product-name { font-size: clamp(14px, 3vw, 16px); font-weight: 500; color: var(--text-dark); margin-bottom: 5px; }
-        .product-price { font-size: clamp(13px, 3vw, 15px); color: var(--text-muted); }
-        .slider-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 50px; height: 50px; background-color: rgba(253, 251, 247, 0.9); border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 20; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: none; transition: 0.3s; }
-        .slider-nav:hover { background-color: var(--brand-green); color: var(--bg-cream); }
-        .slider-nav svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
-        .slider-nav.left { left: 10px; }
-        .slider-nav.right { right: 10px; }
-        @media (min-width: 768px) { .slider-nav { display: flex; } .product-slider { padding: 0 80px 20px; } }
+
+        .product-info { padding: 20px 10px 0; text-align: left; }
+        .product-tag { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--brand-green); font-weight: 600; margin-bottom: 5px; display: block; }
+        .product-name { font-size: clamp(13px, 2vw, 14px); font-weight: 400; color: var(--text-dark); margin-bottom: 5px; letter-spacing: 0.5px; }
+        .product-price { font-size: clamp(12px, 2vw, 13px); color: var(--text-muted); font-weight: 300; }
+        
+        .color-swatches { display: flex; gap: 6px; margin-top: 10px; align-items: center; }
+        .swatch { width: 12px; height: 12px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); cursor: pointer; }
+        .swatch.black { background-color: #1a1a1a; }
+        .swatch.brown { background-color: #5c3a21; }
+        .swatch.pink { background-color: #e8a0b4; }
+        .swatch.more { font-size: 10px; color: var(--text-muted); margin-left: 4px; }
+
+        /* VIEW MORE BUTTON */
+        .view-more-container { text-align: center; padding: 40px 0 80px; }
+        .view-more-btn { display: inline-block; padding: 16px 70px; background-color: transparent; border: 1px solid var(--brand-green); color: var(--brand-green); font-size: 12px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: var(--transition-luxury); font-family: var(--font-sans); border-radius: 50px; }
+        .view-more-btn:hover { background-color: var(--brand-green); color: var(--bg-cream); }
+        .view-more-btn.loading { opacity: 0.5; pointer-events: none; }
 
         /* SIDE MENU */
-        .side-menu { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; height: 100dvh; background-color: var(--bg-cream); z-index: 2000; transition: var(--transition-smooth); padding: 40px 30px; box-shadow: 5px 0 30px rgba(0,0,0,0.1); overflow-y: auto; display: flex; flex-direction: column; }
+        .side-menu { position: fixed; top: 0; left: -100%; width: 100%; height: 100vh; height: 100dvh; background-color: var(--bg-cream); z-index: 2000; transition: var(--transition-luxury); padding: 40px 30px; box-shadow: 5px 0 40px rgba(0,0,0,0.1); overflow-y: auto; display: flex; flex-direction: column; }
         .side-menu.open { left: 0; }
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 40px; line-height: 1; cursor: pointer; color: var(--brand-green); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
         .menu-list { list-style: none; margin-top: 60px; }
         .menu-item { border-bottom: 1px solid rgba(107, 112, 67, 0.15); }
         .menu-item > a { display: block; padding: 20px 0; font-size: clamp(20px, 6vw, 26px); text-decoration: none; color: var(--brand-green); font-weight: 400; font-family: var(--font-serif); transition: 0.3s; cursor: pointer; }
         .menu-item > a:hover { color: var(--brand-green-dark); padding-left: 10px; }
-        .sub-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; list-style: none; padding-left: 15px; }
+        .sub-menu { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out; list-style: none; padding-left: 15px; }
         .sub-menu li a { display: block; padding: 12px 0; font-size: clamp(15px, 4vw, 18px); color: var(--brand-green); text-decoration: none; opacity: 0.8; }
         .sub-menu li a:hover { opacity: 1; text-decoration: underline; }
 
@@ -101,9 +111,9 @@
         .footer-bottom-right a:hover { color: var(--brand-green); text-decoration: underline; }
 
         /* TOAST & OVERLAY */
-        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background-color: var(--brand-green); color: var(--bg-cream); padding: 15px 30px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 3000; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0; pointer-events: none; }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background-color: var(--brand-green); color: var(--bg-cream); padding: 15px 30px; border-radius: 50px; font-size: 14px; font-weight: 500; z-index: 3000; transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1); opacity: 0; pointer-events: none; display: flex; align-items: center; gap: 10px; }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1500; opacity: 0; pointer-events: none; transition: 0.5s; backdrop-filter: blur(3px); }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1500; opacity: 0; pointer-events: none; transition: 0.6s; backdrop-filter: blur(3px); }
         .overlay.active { opacity: 1; pointer-events: auto; }
 
         @media (min-width: 768px) {
@@ -111,6 +121,7 @@
             header.scrolled { padding: 20px 50px; }
             .side-menu { width: 400px; padding: 50px; }
             .close-btn { top: 30px; right: 30px; }
+            .category-section { padding: 100px 50px 40px; }
         }
     </style>
 </head>
@@ -128,7 +139,7 @@
     </header>
 
     <!-- SEARCH OVERLAY -->
-    <div class="search-overlay" id="searchOverlay" style="position:fixed;top:0;left:0;width:100%;height:100vh;background-color:var(--bg-cream);z-index:3000;transform:translateY(-100%);transition:var(--transition-smooth);overflow-y:auto;padding:40px 20px;display:flex;flex-direction:column;align-items:center;">
+    <div class="search-overlay" id="searchOverlay" style="position:fixed;top:0;left:0;width:100%;height:100vh;background-color:var(--bg-cream);z-index:3000;transform:translateY(-100%);transition:var(--transition-luxury);overflow-y:auto;padding:40px 20px;display:flex;flex-direction:column;align-items:center;">
         <div style="font-family:var(--font-serif);font-size:clamp(28px,6vw,48px);font-weight:700;color:var(--brand-green);letter-spacing:2px;text-transform:uppercase;margin-bottom:50px;margin-top:20px;text-align:center;">PAYOFF</div>
         <div style="width:100%;max-width:900px;position:relative;margin-bottom:60px;">
             <input type="text" style="width:100%;padding:20px 60px 20px 30px;font-size:clamp(16px,3vw,20px);border:1px solid rgba(107,112,67,0.3);border-radius:50px;background:transparent;color:var(--brand-green);outline:none;" placeholder="Search for a product" id="searchInput">
@@ -145,129 +156,345 @@
         </div>
     </section>
 
-    <!-- SHIRTS SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Shirts</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('shirtsSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="shirtsSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop" alt="Shirt 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Classic Cotton Shirt</div><div class="product-price">$120</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop" alt="Shirt 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Linen Summer Shirt</div><div class="product-price">$140</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=800&auto=format&fit=crop" alt="Shirt 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Oxford Button-Down</div><div class="product-price">$130</div></div></div>
+    <!-- SHIRTS SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Shirts</h2></div>
+        <div class="product-grid" id="shirtsGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?q=80&w=800&auto=format&fit=crop" alt="Shirt" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Classic Cotton Shirt</div><div class="product-price">$120</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('shirtsSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop" alt="Shirt" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Linen Summer Shirt</div><div class="product-price">$140</div><div class="color-swatches"><div class="swatch black"></div><div class="swatch brown"></div></div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=800&auto=format&fit=crop" alt="Shirt" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Oxford Button-Down</div><div class="product-price">$130</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Shirt" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Printed Casual Shirt</div><div class="product-price">$110</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="shirtsGrid" data-category="shirts">View More</button>
         </div>
     </section>
 
-    <!-- PENTS SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Pents</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('pentsSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="pentsSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=800&auto=format&fit=crop" alt="Pents 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Tailored Pents</div><div class="product-price">$180</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=800&auto=format&fit=crop" alt="Pents 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Slim Fit Chinos</div><div class="product-price">$160</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?q=80&w=800&auto=format&fit=crop" alt="Pents 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Formal Wool Pents</div><div class="product-price">$220</div></div></div>
+    <!-- PENTS SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Pents</h2></div>
+        <div class="product-grid" id="pentsGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=800&auto=format&fit=crop" alt="Pents" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Tailored Pents</div><div class="product-price">$180</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('pentsSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=800&auto=format&fit=crop" alt="Pents" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Slim Fit Chinos</div><div class="product-price">$160</div><div class="color-swatches"><div class="swatch black"></div><div class="swatch brown"></div></div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?q=80&w=800&auto=format&fit=crop" alt="Pents" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Formal Wool Pents</div><div class="product-price">$220</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" alt="Pents" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Casual Trousers</div><div class="product-price">$150</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="pentsGrid" data-category="pents">View More</button>
         </div>
     </section>
 
-    <!-- SHALWAAR KAMEEZ SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Shalwaar Kameez</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('shalwaarSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="shalwaarSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" alt="Shalwaar 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Classic Shalwaar Kameez</div><div class="product-price">$250</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=800&auto=format&fit=crop" alt="Shalwaar 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Embroidered Shalwaar</div><div class="product-price">$320</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Shalwaar 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Festive Shalwaar</div><div class="product-price">$280</div></div></div>
+    <!-- SHALWAAR KAMEEZ SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Shalwaar Kameez</h2></div>
+        <div class="product-grid" id="shalwaarGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" alt="Shalwaar" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Classic Shalwaar Kameez</div><div class="product-price">$250</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('shalwaarSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=800&auto=format&fit=crop" alt="Shalwaar" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Embroidered Shalwaar</div><div class="product-price">$320</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Shalwaar" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Festive Shalwaar</div><div class="product-price">$280</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?q=80&w=800&auto=format&fit=crop" alt="Shalwaar" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Silk Shalwaar Kameez</div><div class="product-price">$400</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="shalwaarGrid" data-category="shalwaar">View More</button>
         </div>
     </section>
 
-    <!-- KURTA PAJAMA SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Kurta Pajama</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('kurtaSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="kurtaSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop" alt="Kurta 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Cotton Kurta Pajama</div><div class="product-price">$200</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1626497764746-6dc36546b388?q=80&w=800&auto=format&fit=crop" alt="Kurta 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Silk Kurta Pajama</div><div class="product-price">$350</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1605763240000-7e93b172d754?q=80&w=800&auto=format&fit=crop" alt="Kurta 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Designer Kurta</div><div class="product-price">$400</div></div></div>
+    <!-- KURTA PAJAMA SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Kurta Pajama</h2></div>
+        <div class="product-grid" id="kurtaGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop" alt="Kurta" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Cotton Kurta Pajama</div><div class="product-price">$200</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('kurtaSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1626497764746-6dc36546b388?q=80&w=800&auto=format&fit=crop" alt="Kurta" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Silk Kurta Pajama</div><div class="product-price">$350</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1605763240000-7e93b172d754?q=80&w=800&auto=format&fit=crop" alt="Kurta" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Designer Kurta</div><div class="product-price">$400</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Kurta" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Embroidered Kurta</div><div class="product-price">$380</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="kurtaGrid" data-category="kurta">View More</button>
         </div>
     </section>
 
-    <!-- TROUSERS SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Trousers</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('trousersSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="trousersSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" alt="Trouser 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Casual Trousers</div><div class="product-price">$150</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?q=80&w=800&auto=format&fit=crop" alt="Trouser 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Formal Trousers</div><div class="product-price">$190</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=800&auto=format&fit=crop" alt="Trouser 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Slim Fit Trousers</div><div class="product-price">$170</div></div></div>
+    <!-- TROUSERS SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Trousers</h2></div>
+        <div class="product-grid" id="trousersGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" alt="Trouser" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Casual Trousers</div><div class="product-price">$150</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('trousersSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?q=80&w=800&auto=format&fit=crop" alt="Trouser" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Formal Trousers</div><div class="product-price">$190</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=800&auto=format&fit=crop" alt="Trouser" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Slim Fit Trousers</div><div class="product-price">$170</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" alt="Trouser" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Wide Leg Trousers</div><div class="product-price">$160</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="trousersGrid" data-category="trousers">View More</button>
         </div>
     </section>
 
-    <!-- TRACK SUITS SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Track Suits</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('trackSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="trackSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Track 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Sport Track Suit</div><div class="product-price">$130</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=800&auto=format&fit=crop" alt="Track 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Premium Track Suit</div><div class="product-price">$180</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=800&auto=format&fit=crop" alt="Track 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Training Track Suit</div><div class="product-price">$150</div></div></div>
+    <!-- TRACK SUITS SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Track Suits</h2></div>
+        <div class="product-grid" id="trackGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Track" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Sport Track Suit</div><div class="product-price">$130</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('trackSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=800&auto=format&fit=crop" alt="Track" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Premium Track Suit</div><div class="product-price">$180</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=800&auto=format&fit=crop" alt="Track" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Training Track Suit</div><div class="product-price">$150</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" alt="Track" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Zip-Up Track Suit</div><div class="product-price">$160</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="trackGrid" data-category="track">View More</button>
         </div>
     </section>
 
-    <!-- HOODIES SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Hoodies</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('hoodiesSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="hoodiesSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" alt="Hoodie 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Essential Hoodie</div><div class="product-price">$110</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=800&auto=format&fit=crop" alt="Hoodie 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Zip-Up Hoodie</div><div class="product-price">$130</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?q=80&w=800&auto=format&fit=crop" alt="Hoodie 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Oversized Hoodie</div><div class="product-price">$140</div></div></div>
+    <!-- HOODIES SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Hoodies</h2></div>
+        <div class="product-grid" id="hoodiesGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" alt="Hoodie" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Essential Hoodie</div><div class="product-price">$110</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('hoodiesSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=800&auto=format&fit=crop" alt="Hoodie" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Zip-Up Hoodie</div><div class="product-price">$130</div><div class="color-swatches"><div class="swatch black"></div><div class="swatch brown"></div></div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?q=80&w=800&auto=format&fit=crop" alt="Hoodie" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Oversized Hoodie</div><div class="product-price">$140</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Hoodie" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Sport Hoodie</div><div class="product-price">$120</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="hoodiesGrid" data-category="hoodies">View More</button>
         </div>
     </section>
 
-    <!-- JACKETS SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Jackets</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('jacketsSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="jacketsSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop" alt="Jacket 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Leather Jacket</div><div class="product-price">$450</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" alt="Jacket 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Wool Coat</div><div class="product-price">$380</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1548126032-079a0fb0099d?q=80&w=800&auto=format&fit=crop" alt="Jacket 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Bomber Jacket</div><div class="product-price">$320</div></div></div>
+    <!-- JACKETS SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Jackets</h2></div>
+        <div class="product-grid" id="jacketsGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop" alt="Jacket" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Leather Jacket</div><div class="product-price">$450</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('jacketsSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" alt="Jacket" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Wool Coat</div><div class="product-price">$380</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1548126032-079a0fb0099d?q=80&w=800&auto=format&fit=crop" alt="Jacket" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Bomber Jacket</div><div class="product-price">$320</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop" alt="Jacket" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Puffer Jacket</div><div class="product-price">$400</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="jacketsGrid" data-category="jackets">View More</button>
         </div>
     </section>
 
-    <!-- SHOES SLIDER -->
-    <section class="slider-section">
-        <div class="slider-header"><h2 class="slider-title">Shoes</h2></div>
-        <div class="slider-container">
-            <button class="slider-nav left" onclick="slide('shoesSlider', -1)"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></button>
-            <div class="product-slider" id="shoesSlider">
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop" alt="Shoe 1" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Classic Leather Shoes</div><div class="product-price">$280</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop" alt="Shoe 2" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Sneakers</div><div class="product-price">$190</div></div></div>
-                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=800&auto=format&fit=crop" alt="Shoe 3" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Formal Oxfords</div><div class="product-price">$310</div></div></div>
+    <!-- SHOES SECTION -->
+    <section class="category-section">
+        <div class="category-header"><h2 class="category-title">Shoes</h2></div>
+        <div class="product-grid" id="shoesGrid">
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop" alt="Shoe" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Classic Leather Shoes</div><div class="product-price">$280</div></div>
             </div>
-            <button class="slider-nav right" onclick="slide('shoesSlider', 1)"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></button>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop" alt="Shoe" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><span class="product-tag">New</span><div class="product-name">Sneakers</div><div class="product-price">$190</div><div class="color-swatches"><div class="swatch black"></div><div class="swatch brown"></div></div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=800&auto=format&fit=crop" alt="Shoe" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Formal Oxfords</div><div class="product-price">$310</div></div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=800&auto=format&fit=crop" alt="Shoe" class="product-image">
+                    <button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>
+                </div>
+                <div class="product-info"><div class="product-name">Casual Loafers</div><div class="product-price">$240</div></div>
+            </div>
+        </div>
+        <div class="view-more-container">
+            <button class="view-more-btn" data-target="shoesGrid" data-category="shoes">View More</button>
         </div>
     </section>
 
@@ -311,16 +538,9 @@
         </ul>
     </nav>
 
-    <div class="toast" id="toast">Added to Wishlist</div>
+    <div class="toast" id="toast"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Added to Wishlist</div>
 
     <script>
-        // SLIDER FUNCTION
-        function slide(sliderId, direction) {
-            const slider = document.getElementById(sliderId);
-            const scrollAmount = 340;
-            slider.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
-        }
-
         // HEADER SCROLL
         const header = document.getElementById('header');
         function checkScroll() {
@@ -398,6 +618,102 @@
                 body.style.overflow = ''; 
             });
         }
+
+        // --- VIEW MORE (LOAD MORE PRODUCTS PER CATEGORY) ---
+        const categoryProducts = {
+            shirts: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?q=80&w=800&auto=format&fit=crop" alt="Shirt" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Linen Summer Shirt</div><div class="product-price">$140</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?q=80&w=800&auto=format&fit=crop" alt="Shirt" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Oxford Button-Down</div><div class="product-price">$130</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Shirt" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Printed Casual Shirt</div><div class="product-price">$110</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop" alt="Shirt" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Flannel Shirt</div><div class="product-price">$125</div></div></div>
+            `,
+            pents: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1552902865-b72c031ac5ea?q=80&w=800&auto=format&fit=crop" alt="Pents" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Formal Wool Pents</div><div class="product-price">$220</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" alt="Pents" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Casual Trousers</div><div class="product-price">$150</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?q=80&w=800&auto=format&fit=crop" alt="Pents" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Slim Fit Pents</div><div class="product-price">$170</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" alt="Pents" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Wide Leg Pents</div><div class="product-price">$160</div></div></div>
+            `,
+            shalwaar: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Shalwaar" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Festive Shalwaar</div><div class="product-price">$280</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?q=80&w=800&auto=format&fit=crop" alt="Shalwaar" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Silk Shalwaar Kameez</div><div class="product-price">$400</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" alt="Shalwaar" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Cotton Shalwaar Kameez</div><div class="product-price">$220</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1597983073493-88cd35cf93b0?q=80&w=800&auto=format&fit=crop" alt="Shalwaar" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Embroidered Shalwaar</div><div class="product-price">$320</div></div></div>
+            `,
+            kurta: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1614252369475-531eba835eb1?q=80&w=800&auto=format&fit=crop" alt="Kurta" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Embroidered Kurta</div><div class="product-price">$380</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop" alt="Kurta" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Cotton Kurta Pajama</div><div class="product-price">$200</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1626497764746-6dc36546b388?q=80&w=800&auto=format&fit=crop" alt="Kurta" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Silk Kurta Pajama</div><div class="product-price">$350</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1605763240000-7e93b172d754?q=80&w=800&auto=format&fit=crop" alt="Kurta" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Designer Kurta</div><div class="product-price">$400</div></div></div>
+            `,
+            trousers: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=800&auto=format&fit=crop" alt="Trouser" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Slim Fit Trousers</div><div class="product-price">$170</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop" alt="Trouser" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Casual Trousers</div><div class="product-price">$150</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1584370848010-d7fe6bc767ec?q=80&w=800&auto=format&fit=crop" alt="Trouser" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Formal Trousers</div><div class="product-price">$190</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" alt="Trouser" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Wide Leg Trousers</div><div class="product-price">$160</div></div></div>
+            `,
+            track: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" alt="Track" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Zip-Up Track Suit</div><div class="product-price">$160</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Track" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Sport Track Suit</div><div class="product-price">$130</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=800&auto=format&fit=crop" alt="Track" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Premium Track Suit</div><div class="product-price">$180</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1483721310020-03333e577078?q=80&w=800&auto=format&fit=crop" alt="Track" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Training Track Suit</div><div class="product-price">$150</div></div></div>
+            `,
+            hoodies: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1578768079052-aa76e52ff62e?q=80&w=800&auto=format&fit=crop" alt="Hoodie" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Oversized Hoodie</div><div class="product-price">$140</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" alt="Hoodie" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Essential Hoodie</div><div class="product-price">$110</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?q=80&w=800&auto=format&fit=crop" alt="Hoodie" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Zip-Up Hoodie</div><div class="product-price">$130</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop" alt="Hoodie" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Sport Hoodie</div><div class="product-price">$120</div></div></div>
+            `,
+            jackets: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop" alt="Jacket" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Puffer Jacket</div><div class="product-price">$400</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?q=80&w=800&auto=format&fit=crop" alt="Jacket" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Leather Jacket</div><div class="product-price">$450</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" alt="Jacket" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Wool Coat</div><div class="product-price">$380</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1548126032-079a0fb0099d?q=80&w=800&auto=format&fit=crop" alt="Jacket" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Bomber Jacket</div><div class="product-price">$320</div></div></div>
+            `,
+            shoes: `
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=800&auto=format&fit=crop" alt="Shoe" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Casual Loafers</div><div class="product-price">$240</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=800&auto=format&fit=crop" alt="Shoe" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Classic Leather Shoes</div><div class="product-price">$280</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?q=80&w=800&auto=format&fit=crop" alt="Shoe" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Sneakers</div><div class="product-price">$190</div></div></div>
+                <div class="product-card"><div class="product-image-container"><img src="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?q=80&w=800&auto=format&fit=crop" alt="Shoe" class="product-image"><button class="wishlist-btn"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button></div><div class="product-info"><div class="product-name">Formal Oxfords</div><div class="product-price">$310</div></div></div>
+            `
+        };
+
+        document.querySelectorAll('.view-more-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const category = this.getAttribute('data-category');
+                const grid = document.getElementById(targetId);
+                
+                this.textContent = 'Loading...';
+                this.classList.add('loading');
+                
+                setTimeout(() => {
+                    if (categoryProducts[category]) {
+                        grid.insertAdjacentHTML('beforeend', categoryProducts[category]);
+                    }
+                    
+                    // Re-attach wishlist listeners
+                    const newWishlistBtns = grid.querySelectorAll('.wishlist-btn');
+                    newWishlistBtns.forEach(b => {
+                        if (!b.hasAttribute('data-bound')) {
+                            b.setAttribute('data-bound', 'true');
+                            b.addEventListener('click', function(e) {
+                                e.stopPropagation(); 
+                                this.classList.toggle('active');
+                                if (this.classList.contains('active')) {
+                                    toast.classList.add('show');
+                                    setTimeout(() => toast.classList.remove('show'), 2000);
+                                }
+                            });
+                        }
+                    });
+
+                    this.textContent = 'No More Products';
+                    this.style.opacity = '0.5';
+                    this.style.pointerEvents = 'none';
+                    this.classList.remove('loading');
+                }, 600);
+            });
+        });
     </script>
 </body>
 </html>
